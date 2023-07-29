@@ -1,9 +1,15 @@
+import Page from '@/layouts/Page'
+import Link from '@/theme/button-link'
+
 export default function Home() {
 	return (
-		<main className={`flex min-h-screen flex-col items-center gap-20 p-24`}>
-			<button className='rounded-lg disabled:opacity-40 disabled:cursor-not-allowed px-3 py-2.5 disabled:active:scale-100 bg-green-600 border-green-600 transition-all font-medium active:scale-95'>
-				click!
-			</button>
-		</main>
+		<Page className='flex flex-col justify-between'>
+			<picture className='rounded-md py-24 bg-gray-200'></picture>
+
+			<section className='grid gap-4 place-items-center'>
+				<Link href='/create' label='Create' />
+				<Link href='/join' label='Join' />
+			</section>
+		</Page>
 	)
 }
