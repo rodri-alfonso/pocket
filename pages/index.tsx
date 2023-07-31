@@ -8,7 +8,6 @@ export default function Home() {
 
 			<section className='grid gap-4 place-items-center'>
 				<Link href='/create' label='Create' />
-				<Link href='/join' label='Join' />
 			</section>
 		</Page>
 	)

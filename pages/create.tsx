@@ -5,22 +5,34 @@ import Router from 'next/router'
 import Link from '@/theme/button-link'
 import { db } from '@/firebase-config'
 import { collection, addDoc } from 'firebase/firestore'
+import { Planning } from '@/types/planning'
+import { useId } from 'react'
+import { useRegistration } from '@/context/planning'
 
-export default function Creator() {
-	const [roomName, setRoomName] = useState('')
+export default function Create() {
+	const [planningName, setPlanningName] = useState('')
 	const [username, setUsername] = useState('')
+	const hostId = useId()
+	const { setRegistration } = useRegistration()
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
-		if (!roomName || !username) return console.log('Please fill out all fields')
+		if (!planningName || !username) return console.log('Please fill out all fields')
 
-		addDoc(collection(db, 'rooms'), {
-			roomName,
-			username,
-		})
+		const payload: Planning = {
+			currentEstimate: 0,
+			hostId,
+			participants: [{ name: username, vote: 0 }],
+			host: username,
+			isEstimateOpen: false,
+			name: planningName,
+			votingSystem: 'fibonacci',
+		}
+
+		addDoc(collection(db, 'plannings'), payload)
 			.then((response) => {
-				console.log('🚀 ~ file: create.tsx:24 ~ response:', response)
-				// Router.push(`/room/${response.id}`)
+				setRegistration({ name: username, id: hostId })
+				Router.push(`/planning/${response.id}`)
 			})
 			.catch((error) => {
 				console.log(error)
@@ -36,10 +48,10 @@ export default function Creator() {
 
 				<div className='grid gap-4'>
 					<Input
-						label='Room Name'
-						placeholder='Enter a room name'
-						value={roomName}
-						onChange={(e) => setRoomName(e.target.value)}
+						label='Planning Name'
+						placeholder='Enter a planning name'
+						value={planningName}
+						onChange={(e) => setPlanningName(e.target.value)}
 					/>
 					<Input
 						label='Your Name'
