@@ -60,7 +60,11 @@ export default function Create() {
 						onChange={(e) => setUsername(e.target.value)}
 					/>
 				</div>
-				<button>Create</button>
+				<button
+					className={`bg-gray-800 text-white font-medium px-2 py-3 w-full max-w-xs mx-auto rounded-md text-center active:scale-95 transition-all`}
+				>
+					Create
+				</button>
 			</form>
 		</Page>
 	)

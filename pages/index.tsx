@@ -7,7 +7,7 @@ export default function Home() {
 			<picture className='rounded-md py-24 bg-gray-200'></picture>
 
 			<section className='grid gap-4 place-items-center'>
-				<Link href='/create' label='Create' />
+				<Link href='/create' label='Create Planning' />
 			</section>
 		</Page>
 	)
