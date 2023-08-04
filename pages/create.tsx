@@ -8,6 +8,7 @@ import { collection, addDoc } from 'firebase/firestore'
 import { Planning } from '@/types/planning'
 import { useId } from 'react'
 import { useRegistration } from '@/context/planning'
+import ButtonDouble from '@/theme/button-double'
 
 export default function Create() {
 	const [planningName, setPlanningName] = useState('')
@@ -40,11 +41,7 @@ export default function Create() {
 
 	return (
 		<Page>
-			<Link href='/' label='◀️' className='mb-4' />
-
 			<form onSubmit={handleSubmit} className='flex flex-col justify-between h-full p-4'>
-				<picture className='rounded-md py-20 bg-gray-200'></picture>
-
 				<div className='grid gap-4'>
 					<Input
 						label='Planning Name'
@@ -52,18 +49,13 @@ export default function Create() {
 						value={planningName}
 						onChange={(e) => setPlanningName(e.target.value)}
 					/>
-					<Input
-						label='Your Name'
-						placeholder='Enter your name'
-						value={username}
-						onChange={(e) => setUsername(e.target.value)}
-					/>
 				</div>
-				<button
-					className={`bg-gray-800 text-white font-medium px-2 py-3 w-full max-w-xs mx-auto rounded-md text-center active:scale-95 transition-all`}
-				>
-					Create
-				</button>
+				<ButtonDouble
+					labelPrimary='Create'
+					labelSecondary='Cancel'
+					onClickPrimary={() => {}}
+					onClickSecondary={() => Router.push('/')}
+				/>
 			</form>
 		</Page>
 	)
