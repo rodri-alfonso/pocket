@@ -1,27 +1,28 @@
 import { useEffect, useState } from 'react'
-import { Participant } from '@/types/planning'
+import { Participant, Planning } from '@/types/planning'
 import { db } from '@/firebase-config'
 
 import { doc, onSnapshot } from 'firebase/firestore'
 
 interface PlanningState {
-	initialParticipants: Array<Participant>
+	initialPlanning: Planning
 	planningId: string
 }
 
-export function usePlanningState({ initialParticipants, planningId }: PlanningState) {
+export function usePlanningState({ initialPlanning, planningId }: PlanningState) {
 	//memorizar este valor
-	const [participants, setParticipants] = useState(initialParticipants)
+	const [planning, setPlanning] = useState(initialPlanning)
 
 	useEffect(() => {
 		const unsubscribe = onSnapshot(doc(db, 'plannings', planningId), (doc) => {
-			if (doc.exists()) setParticipants([...doc.data().participants])
+			if (doc.exists()) setPlanning(doc.data())
 		})
 
 		return () => unsubscribe()
 	}, [])
 
-	return { participants }
+	// return { participants: planning.participants, planning }
+	return { participants: planning.participants, planning }
 }
 
 // hacer un context y memorizarlo para guardar la informacion del auth y de la planning ;)

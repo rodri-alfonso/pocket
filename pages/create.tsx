@@ -20,11 +20,10 @@ export default function Create() {
 		if (!planningName || !username) return console.log('Please fill out all fields')
 
 		const payload: Planning = {
-			currentEstimate: 0,
 			hostId,
 			participants: [{ name: username, vote: 0 }],
 			host: username,
-			isEstimateOpen: false,
+			average: 0,
 			name: planningName,
 			votingSystem: 'fibonacci',
 		}

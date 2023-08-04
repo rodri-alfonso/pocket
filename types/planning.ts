@@ -9,8 +9,7 @@ export interface Planning {
 	participants: Array<Participant>
 	host: string
 	name: string
-	isEstimateOpen: boolean
-	currentEstimate: number
 	hostId: string
 	votingSystem: VotingSystem
+	average: number
 }
