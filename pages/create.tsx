@@ -2,7 +2,6 @@ import Page from '@/layouts/Page'
 import Input from '@/theme/Input'
 import { useState } from 'react'
 import Router from 'next/router'
-import Link from '@/theme/button-link'
 import { db } from '@/firebase-config'
 import { collection, addDoc } from 'firebase/firestore'
 import { Planning } from '@/types/planning'
@@ -14,7 +13,9 @@ export default function Create() {
 	const [planningName, setPlanningName] = useState('')
 	const [username, setUsername] = useState('')
 	const hostId = useId()
-	const { setRegistration } = useRegistration()
+	const { setRegistration, user } = useRegistration()
+
+	const hasUser = Boolean(user.name) || Boolean(username)
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
@@ -41,18 +42,28 @@ export default function Create() {
 
 	return (
 		<Page>
-			<form onSubmit={handleSubmit} className='flex flex-col justify-between h-full p-4'>
-				<div className='grid gap-4'>
+			<form onSubmit={handleSubmit} className='flex flex-col justify-between h-full'>
+				<h1 className='font-semibold text-lg '>Planning Creator</h1>
+				<div className='grid gap-8'>
 					<Input
 						label='Planning Name'
 						placeholder='Enter a planning name'
 						value={planningName}
 						onChange={(e) => setPlanningName(e.target.value)}
 					/>
+					{!user.name && (
+						<Input
+							label='Enter your name'
+							placeholder='Enter username'
+							value={username}
+							onChange={(e) => setUsername(e.target.value)}
+						/>
+					)}
 				</div>
 				<ButtonDouble
 					labelPrimary='Create'
 					labelSecondary='Cancel'
+					disabled={!planningName || !hasUser}
 					onClickPrimary={() => {}}
 					onClickSecondary={() => Router.push('/')}
 				/>
