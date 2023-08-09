@@ -1,3 +1,5 @@
+import Button from './button'
+
 interface ButtonProps {
 	labelPrimary: string
 	labelSecondary: string
@@ -16,7 +18,7 @@ export default function ButtonDouble({
 	disabled = false,
 }: ButtonProps) {
 	return (
-		<div className={`grid gap-2  ${className}`}>
+		<section className={`grid gap-2.5 w-full max-w-xs mx-auto  ${className}`}>
 			<button
 				className={`bg-gray-800 disabled:opacity-30 disabled:active:scale-100 text-white font-medium px-2 py-3  rounded-md text-center active:scale-95 transition-all`}
 				onClick={onClickPrimary}
@@ -25,12 +27,7 @@ export default function ButtonDouble({
 			>
 				{labelPrimary}
 			</button>
-			<button
-				onClick={onClickSecondary}
-				className={`bg-white  text-gray-800 hover:bg-gray-100 font-medium px-2 py-3  rounded-md text-center active:scale-95 transition-all`}
-			>
-				{labelSecondary}
-			</button>
-		</div>
+			<Button text={labelSecondary} secondary onClick={onClickSecondary} className='rounded-md' />
+		</section>
 	)
 }
