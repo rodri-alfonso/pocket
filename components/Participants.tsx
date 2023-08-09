@@ -27,9 +27,8 @@ export default function Participants({ participants, reveal }: Props) {
 	}
 
 	return (
-		<div className='grid gap-2 left-6 top-16'>
-			<h3>Participants</h3>
-			<section className=' flex gap-6'>
+		<div className='grid gap-2'>
+			<section className='flex gap-6 overflow-x-auto p-2'>
 				{participants.map((user, idx) => (
 					<Participant name={user.name} key={`${user.name}_${idx}`} vote={user.vote} />
 				))}

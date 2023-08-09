@@ -8,23 +8,21 @@ import { Planning } from '@/types/planning'
 import { useId } from 'react'
 import { useRegistration } from '@/context/planning'
 import ButtonDouble from '@/theme/button-double'
+import Content from '@/layouts/Content'
 
 export default function Create() {
 	const [planningName, setPlanningName] = useState('')
-	const [username, setUsername] = useState('')
 	const hostId = useId()
-	const { setRegistration, user } = useRegistration()
-
-	const hasUser = Boolean(user.name) || Boolean(username)
+	const { user, setRegistration } = useRegistration()
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
-		if (!planningName || !username) return console.log('Please fill out all fields')
+		if (!planningName) return console.log('Please fill out all fields')
 
 		const payload: Planning = {
 			hostId,
-			participants: [{ name: username, vote: 0 }],
-			host: username,
+			participants: [{ name: user.name, vote: 0, avatar: 'F1' }],
+			host: user.name,
 			average: 0,
 			name: planningName,
 			votingSystem: 'fibonacci',
@@ -32,7 +30,7 @@ export default function Create() {
 
 		addDoc(collection(db, 'plannings'), payload)
 			.then((response) => {
-				setRegistration({ name: username, id: hostId })
+				setRegistration({ ...user, planningId: response.id })
 				Router.push(`/planning/${response.id}`)
 			})
 			.catch((error) => {
@@ -42,32 +40,26 @@ export default function Create() {
 
 	return (
 		<Page>
-			<form onSubmit={handleSubmit} className='flex flex-col justify-between h-full'>
-				<h1 className='font-semibold text-lg '>Planning Creator</h1>
-				<div className='grid gap-8'>
-					<Input
-						label='Planning Name'
-						placeholder='Enter a planning name'
-						value={planningName}
-						onChange={(e) => setPlanningName(e.target.value)}
-					/>
-					{!user.name && (
+			<Content>
+				<form onSubmit={handleSubmit} className='flex flex-col justify-between h-full'>
+					<div className='flex flex-col gap-8 items-center'>
+						<h1 className='font-medium text-gray-600 text-lg'>Let's create a planning</h1>
 						<Input
-							label='Enter your name'
-							placeholder='Enter username'
-							value={username}
-							onChange={(e) => setUsername(e.target.value)}
+							label='Planning Name'
+							placeholder='Enter a planning name'
+							value={planningName}
+							onChange={(e) => setPlanningName(e.target.value)}
 						/>
-					)}
-				</div>
-				<ButtonDouble
-					labelPrimary='Create'
-					labelSecondary='Cancel'
-					disabled={!planningName || !hasUser}
-					onClickPrimary={() => {}}
-					onClickSecondary={() => Router.push('/')}
-				/>
-			</form>
+					</div>
+					<ButtonDouble
+						labelPrimary='Create'
+						labelSecondary='Cancel'
+						disabled={!planningName}
+						onClickPrimary={() => {}}
+						onClickSecondary={() => Router.push('/')}
+					/>
+				</form>
+			</Content>
 		</Page>
 	)
 }
