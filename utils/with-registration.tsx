@@ -16,7 +16,9 @@ export default function withRegistration(Component: any) {
 		console.log('🚀 ~ file: with-registration.tsx:16 ~ user:', user)
 
 		useEffect(() => {
-			const storage = JSON.parse(localStorage.getItem(ENVIRONMENTS.STORAGE_KEY) || '{"name": "", "id": ""}')
+			const storage = JSON.parse(
+				localStorage.getItem(ENVIRONMENTS.STORAGE_KEY) || '{"name": "", "id": "", "avatar": "F1", "planningId": ""}'
+			)
 			if (storage) setRegistration(storage)
 
 			setIsLoading(false)

@@ -9,6 +9,8 @@ const initialState: State = {
 	user: {
 		name: '',
 		id: '',
+		avatar: 'F1',
+		planningId: '',
 	},
 	isRegistered: false,
 }
@@ -39,7 +41,7 @@ const useRegistration = () => {
 	const { state, dispatch } = useContext(PlanningContext)
 
 	useEffect(() => {
-		if (storage) dispatch({ type: SET_REGISTRATION_IN, payload: storage })
+		// if (storage) dispatch({ type: SET_REGISTRATION_IN, payload: storage })
 	}, [])
 
 	const setRegistration = (payload: User) => {

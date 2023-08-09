@@ -1,7 +1,6 @@
 import Page from '@/layouts/Page'
-
 import { db } from '@/firebase-config'
-import { doc, getDoc, updateDoc } from 'firebase/firestore'
+import { doc, getDoc } from 'firebase/firestore'
 import { Planning } from '@/types/planning'
 import EmptyStateGuests from '@/components/empty-state-guest'
 import { usePlanningState } from '@/hooks/planning'
@@ -10,6 +9,8 @@ import withRegistration from '@/utils/with-registration'
 import Participants from '@/components/Participants'
 import { useRegistration } from '@/context/planning'
 import CardSelector from '@/components/CardSelector'
+import Content from '@/layouts/Content'
+import ResumeView from '@/components/ResumeView'
 
 export async function getServerSideProps(ctx: any) {
 	const { id } = ctx.query
@@ -47,54 +48,28 @@ function Room({ planning: initialPlanning }: Props) {
 
 	const currentParticipant = participants.find((participant) => participant.name === user.name)
 
-	function handleReveal() {
-		const average = participants.reduce((acc, participant) => acc + participant.vote, 0) / participants.length
-
-		updateDoc(doc(db, 'plannings', router.query.id as string), {
-			average,
-		})
+	const SelectorView = () => {
+		return (
+			<Content className='flex flex-col justify-between relative'>
+				<CardSelector
+					participants={participants}
+					currentCard={currentParticipant?.vote}
+					revealed={Boolean(planning.average)}
+					planningName={planning.name}
+				/>
+			</Content>
+		)
 	}
 
-	function handleEnd() {
-		updateDoc(doc(db, 'plannings', router.query.id as string), {
-			average: 0,
-			participants: participants.map((participant) => ({ ...participant, vote: 0 })),
-		})
+	const ResumeViewComponent = () => {
+		return (
+			<Content className='flex flex-col justify-between relative' spreadLayout>
+				<ResumeView participants={planning.participants} average={planning.average} />
+			</Content>
+		)
 	}
 
-	return (
-		<Page className='flex flex-col justify-between'>
-			<h2>{planning.name}</h2>
-			<Participants participants={participants} reveal={Boolean(planning.average)} />
-
-			{planning.average ? (
-				<div>
-					<span>average: {planning.average} </span>
-					<button onClick={handleEnd} className='bg-gray-400 rounded-lg px-4 py-2 disabled:opacity-25'>
-						close estimation
-					</button>
-				</div>
-			) : (
-				<section>
-					<div className='bg-gray-200 rounded-md py-20 grid place-items-center w-full max-w-xs mx-auto'>
-						<button
-							className='bg-gray-400 rounded-lg px-4 py-2 disabled:opacity-25'
-							disabled={!currentParticipant?.vote}
-							onClick={handleReveal}
-						>
-							Reveal
-						</button>
-					</div>
-				</section>
-			)}
-
-			<CardSelector
-				participants={participants}
-				currentCard={currentParticipant?.vote}
-				revealed={Boolean(planning.average)}
-			/>
-		</Page>
-	)
+	return <Page>{currentParticipant?.vote ? <ResumeViewComponent /> : <SelectorView />}</Page>
 }
 
 export default withRegistration(Room)

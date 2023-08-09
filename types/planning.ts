@@ -1,8 +1,10 @@
 type VotingSystem = 'fibonacci' | 'tshirt' | 'custom'
+export type Avatar = 'F1' | 'F2'
 
 export type Participant = {
-	name: string
 	vote: number
+	name: string
+	avatar: Avatar
 }
 
 export interface Planning {
