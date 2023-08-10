@@ -6,7 +6,6 @@ import EmptyStateGuests from '@/components/empty-state-guest'
 import { usePlanningState } from '@/hooks/planning'
 import { useRouter } from 'next/router'
 import withRegistration from '@/utils/with-registration'
-import Participants from '@/components/Participants'
 import { useRegistration } from '@/context/planning'
 import CardSelector from '@/components/CardSelector'
 import Content from '@/layouts/Content'
@@ -41,7 +40,8 @@ function Room({ planning: initialPlanning }: Props) {
 
 	const { user } = useRegistration()
 
-	const isEmptyParticipants = participants.filter((participant) => participant.name !== planning.host).length === 0
+	const isEmptyParticipants =
+		participants.filter((participant) => participant.name !== initialPlanning.host).length === 0
 
 	if (!initialPlanning) return <Page>Room not found</Page>
 	if (isEmptyParticipants) return <EmptyStateGuests planningName={planning.name} />
