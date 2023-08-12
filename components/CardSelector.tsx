@@ -4,6 +4,7 @@ import { doc, updateDoc } from 'firebase/firestore'
 import { useRouter } from 'next/router'
 import { db } from '@/firebase-config'
 import { useRegistration } from '@/context/planning'
+import { PLANNING_REF_WITH_ID } from '@/firebase-config'
 
 export default function CardSelector({ participants, revealed, planningName }: any) {
 	const cards = useCards()
@@ -15,7 +16,7 @@ export default function CardSelector({ participants, revealed, planningName }: a
 		if (revealed) return
 		setSelectedCard(selectedCard)
 		const updatedParticipants = participants.filter((participant: any) => participant.name !== user.name)
-		updateDoc(doc(db, 'plannings', router.query.id as string), {
+		updateDoc(PLANNING_REF_WITH_ID(router.query.id as string), {
 			participants: [...updatedParticipants, { name: user.name, vote: selectedCard }],
 		})
 	}

@@ -10,12 +10,11 @@ import { useRegistration } from '@/context/planning'
 import CardSelector from '@/components/CardSelector'
 import Content from '@/layouts/Content'
 import ResumeView from '@/components/ResumeView'
+import { PLANNING_REF_WITH_ID } from '@/firebase-config'
 
 export async function getServerSideProps(ctx: any) {
 	const { id } = ctx.query
-
-	const docRef = doc(db, 'plannings', id)
-	const docSnap = await getDoc(docRef)
+	const docSnap = await getDoc(PLANNING_REF_WITH_ID(id))
 
 	let planning = null
 

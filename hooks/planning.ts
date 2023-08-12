@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Participant, Planning } from '@/types/planning'
-import { db } from '@/firebase-config'
-
-import { doc, onSnapshot } from 'firebase/firestore'
+import { Planning } from '@/types/planning'
+import { PLANNING_REF_WITH_ID } from '@/firebase-config'
+import { onSnapshot } from 'firebase/firestore'
 
 interface PlanningState {
 	initialPlanning: Planning
@@ -14,8 +13,8 @@ export function usePlanningState({ initialPlanning, planningId }: PlanningState)
 	const [planning, setPlanning] = useState(initialPlanning)
 
 	useEffect(() => {
-		const unsubscribe = onSnapshot(doc(db, 'plannings', planningId), (doc) => {
-			if (doc.exists()) setPlanning(doc.data())
+		const unsubscribe = onSnapshot(PLANNING_REF_WITH_ID(planningId), (doc) => {
+			if (doc.exists()) setPlanning(doc.data() as Planning)
 		})
 
 		return () => unsubscribe()

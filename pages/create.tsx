@@ -21,7 +21,7 @@ export default function Create() {
 
 		const payload: Planning = {
 			hostId,
-			participants: [{ name: user.name, vote: 0, avatar: 'F1' }],
+			participants: [{ name: user.name, vote: 0, avatar: 'F1', id: user.id }],
 			host: user.name,
 			average: 0,
 			name: planningName,

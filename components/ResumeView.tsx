@@ -1,11 +1,9 @@
 import F1 from '@/avatars/F1'
-import { db } from '@/firebase-config'
-import Content from '@/layouts/Content'
-import Button from '@/theme/button'
 import { Participant } from '@/types/planning'
-import { doc, updateDoc } from 'firebase/firestore'
+import Button from '@/theme/button'
+import { updateDoc } from 'firebase/firestore'
 import { useRouter } from 'next/router'
-import { useRegistration } from '@/context/planning'
+import { PLANNING_REF_WITH_ID } from '@/firebase-config'
 
 interface Props {
 	participants: Participant[]
@@ -14,19 +12,19 @@ interface Props {
 
 export default function ResumeView({ participants, average }: Props) {
 	const router = useRouter()
-
+	const docRef = PLANNING_REF_WITH_ID(router.query.id as string)
 	const hasAverage = Boolean(average)
 
 	function handleReveal() {
 		const average = participants.reduce((acc, participant) => acc + participant.vote, 0) / participants.length
 
-		updateDoc(doc(db, 'plannings', router.query.id as string), {
+		updateDoc(docRef, {
 			average,
 		})
 	}
 
 	function handleEnd() {
-		updateDoc(doc(db, 'plannings', router.query.id as string), {
+		updateDoc(docRef, {
 			average: 0,
 			participants: participants.map((participant) => ({ ...participant, vote: 0 })),
 		})
@@ -102,28 +100,8 @@ export default function ResumeView({ participants, average }: Props) {
 						return hasAverage ? <Card key={participant.name} vote={participant.vote} /> : <CardMock />
 					})}
 				</div>
-
-				{/* <div className='w-full'>
-					<div className='flex justify-between mb-1'>
-						<span className='text-base font-medium text-gray-500'>Agreement</span>
-						<span className='text-sm font-medium text-gray-500'>45%</span>
-					</div>
-					<div className='w-full  rounded-full h-2.5 bg-gray-300'>
-						<div className='bg-gray-800 h-2.5 rounded-full' style={{ width: '25%' }}></div>
-					</div>
-				</div> */}
 				{hasAverage ? <AgreementLine /> : <AgreementMock />}
 			</div>
-		)
-	}
-
-	const AvatarResult = ({ vote }) => {
-		return hasAverage ? (
-			<span className='w-12 h-12 rounded-full bg-white border border-solid border-gray-600 text-gray-600 font-bold grid place-items-center text-lg'>
-				{vote}
-			</span>
-		) : (
-			<F1 />
 		)
 	}
 

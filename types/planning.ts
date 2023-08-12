@@ -5,6 +5,7 @@ export type Participant = {
 	vote: number
 	name: string
 	avatar: Avatar
+	id: string
 }
 
 export interface Planning {
