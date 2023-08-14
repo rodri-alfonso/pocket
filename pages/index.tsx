@@ -7,14 +7,9 @@ import { getDocs, collection } from 'firebase/firestore'
 import { db } from '@/firebase-config'
 import { Planning } from '@/types/planning'
 import PlanningCard from '@/components/PlanningCard'
-import Alert from '@/theme/alert'
-
-interface CustomPlanning extends Planning {
-	id: string
-}
 
 interface Props {
-	plannings: CustomPlanning[]
+	plannings: Array<Planning & { id: string }>
 }
 
 export async function getServerSideProps() {
@@ -28,9 +23,7 @@ export async function getServerSideProps() {
 
 function Home({ plannings }: Props) {
 	const { user } = useRegistration()
-
 	const filteredPlannings = plannings.filter((planning) => planning.hostId === user.id)
-	const leftPlanningCounter = 2 - plannings.length
 
 	return (
 		<Page className='flex flex-col justify-between'>
@@ -38,7 +31,6 @@ function Home({ plannings }: Props) {
 				<div className='grid gap-4 place-items-center w-full h-full items-end'>
 					<h3 className='font-semibold'>Active plannings</h3>
 					<section className='h-full w-full flex flex-col items-center gap-8 '>
-						{/* <Alert label={`You have ${leftPlanningCounter} free planning left`} /> */}
 						<div className='grid place-items-center gap-3 w-full max-w-xs'>
 							{filteredPlannings.map((planning) => (
 								<PlanningCard key={planning.hostId} {...planning} />

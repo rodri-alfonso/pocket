@@ -34,7 +34,7 @@ export default function CardSelector({ participants, revealed, planningName }: a
 			<div className='grid grid-cols-3 gap-4 w-full place-items-center'>
 				{cards.map((card, idx) => (
 					<button
-						className={`border-solid border text-xl grid place-items-center rounded-lg py-10 w-20 font-semibold transition-all ${
+						className={`border-solid border text-xl grid place-items-center rounded-lg py-8 w-20 font-semibold transition-all ${
 							selectedCard === card ? 'bg-gray-800 text-white' : 'bg-gray-50 border-gray-200 '
 						}`}
 						onClick={() => setSelectedCard(card)}
