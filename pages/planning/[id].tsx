@@ -61,7 +61,7 @@ function Room({ planning: initialPlanning }: Props) {
 				<ResumeView participants={planning.participants} average={planning.average} />
 			) : (
 				<CardSelector
-					participants={initialPlanning.participants}
+					participants={participants}
 					currentCard={currentParticipant?.vote}
 					revealed={Boolean(planning.average)}
 					planningName={planning.name}
