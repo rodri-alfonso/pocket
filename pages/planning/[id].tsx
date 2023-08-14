@@ -5,7 +5,7 @@ import { Planning } from '@/types/planning'
 import EmptyStateGuests from '@/components/empty-state-guest'
 import { usePlanningState } from '@/hooks/planning'
 import { useRouter } from 'next/router'
-import withRegistration from '@/utils/with-registration'
+import withAuth from '@/utils/with-auth'
 import { useRegistration } from '@/context/planning'
 import CardSelector from '@/components/CardSelector'
 import Content from '@/layouts/Content'
@@ -84,4 +84,4 @@ function Room({ planning: initialPlanning }: Props) {
 	return <Page>{currentParticipant?.vote ? <ResumeViewComponent /> : <SelectorView />}</Page>
 }
 
-export default withRegistration(Room)
+export default withAuth(Room)

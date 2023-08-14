@@ -1,7 +1,7 @@
 import Page from '@/layouts/Page'
 import Link from '@/theme/button-link'
 import Content from '@/layouts/Content'
-import withRegistration from '@/utils/with-registration'
+import withAuth from '@/utils/with-auth'
 import { useRegistration } from '@/context/planning'
 import { getDocs, collection } from 'firebase/firestore'
 import { db } from '@/firebase-config'
@@ -44,4 +44,4 @@ function Home({ plannings }: Props) {
 	)
 }
 
-export default withRegistration(Home)
+export default withAuth(Home)
