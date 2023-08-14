@@ -1,6 +1,5 @@
 import Page from '@/layouts/Page'
-import { db } from '@/firebase-config'
-import { arrayUnion, doc, getDoc, setDoc } from 'firebase/firestore'
+import { arrayUnion, getDoc, setDoc } from 'firebase/firestore'
 import { Planning } from '@/types/planning'
 import EmptyStateGuests from '@/components/empty-state-guest'
 import { usePlanningState } from '@/hooks/planning'
@@ -8,7 +7,6 @@ import { useRouter } from 'next/router'
 import withAuth from '@/utils/with-auth'
 import { useRegistration } from '@/context/planning'
 import CardSelector from '@/components/CardSelector'
-import Content from '@/layouts/Content'
 import ResumeView from '@/components/ResumeView'
 import { PLANNING_REF_WITH_ID } from '@/firebase-config'
 import { useEffect } from 'react'
@@ -32,12 +30,9 @@ interface Props {
 
 function Room({ planning: initialPlanning }: Props) {
 	const router = useRouter()
+	const planningId = router.query.id as string
 
-	const { participants, planning } = usePlanningState({
-		initialPlanning,
-		planningId: router.query.id as string,
-	})
-
+	const { participants, planning } = usePlanningState({ initialPlanning, planningId })
 	const { user } = useRegistration()
 
 	const isEmptyParticipants =
@@ -60,28 +55,20 @@ function Room({ planning: initialPlanning }: Props) {
 
 	const currentParticipant = participants.find((participant) => participant.name === user.name)
 
-	const SelectorView = () => {
-		return (
-			<Content className='flex flex-col justify-between relative'>
+	return (
+		<Page>
+			{currentParticipant?.vote ? (
+				<ResumeView participants={planning.participants} average={planning.average} />
+			) : (
 				<CardSelector
-					participants={participants}
+					participants={initialPlanning.participants}
 					currentCard={currentParticipant?.vote}
 					revealed={Boolean(planning.average)}
 					planningName={planning.name}
 				/>
-			</Content>
-		)
-	}
-
-	const ResumeViewComponent = () => {
-		return (
-			<Content className='flex flex-col justify-between relative' spreadLayout>
-				<ResumeView participants={planning.participants} average={planning.average} />
-			</Content>
-		)
-	}
-
-	return <Page>{currentParticipant?.vote ? <ResumeViewComponent /> : <SelectorView />}</Page>
+			)}
+		</Page>
+	)
 }
 
 export default withAuth(Room)

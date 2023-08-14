@@ -4,6 +4,7 @@ import Button from '@/theme/button'
 import { updateDoc } from 'firebase/firestore'
 import { useRouter } from 'next/router'
 import { PLANNING_REF_WITH_ID } from '@/firebase-config'
+import Content from '@/layouts/Content'
 
 interface Props {
 	participants: Participant[]
@@ -106,36 +107,38 @@ export default function ResumeView({ participants, average }: Props) {
 	}
 
 	return (
-		<section className='h-full  flex flex-col justify-between'>
-			<div className='p-6 rounded-3xl flex gap-10 w-full  overflow-x-scroll bg-gray-100'>
-				{participants.map((participant) => (
-					<div
-						className={`grid place-items-center gap-2 text-center relative ${
-							Boolean(participant.vote) ? '' : 'opacity-30'
-						}`}
-					>
-						<F1 />
-						<span className='font-medium text-sm'>{participant.name}</span>
-						{Boolean(participant.vote) && (
-							<span className='bg-gray-900 w-6 h-6 grid place-items-center rounded-full absolute -top-1 -left-1 text-white font-bold text-xs'>
-								{!!average ? participant.vote : 'ok'}
-							</span>
-						)}
-					</div>
-				))}
-			</div>
+		<Content className='flex flex-col justify-between relative' spreadLayout>
+			<section className='h-full  flex flex-col justify-between'>
+				<div className='p-6 rounded-3xl flex gap-10 w-full  overflow-x-scroll bg-gray-100'>
+					{participants.map((participant) => (
+						<div
+							className={`grid place-items-center gap-2 text-center relative ${
+								Boolean(participant.vote) ? '' : 'opacity-30'
+							}`}
+						>
+							<F1 />
+							<span className='font-medium text-sm'>{participant.name}</span>
+							{Boolean(participant.vote) && (
+								<span className='bg-gray-900 w-6 h-6 grid place-items-center rounded-full absolute -top-1 -left-1 text-white font-bold text-xs'>
+									{!!average ? participant.vote : 'ok'}
+								</span>
+							)}
+						</div>
+					))}
+				</div>
 
-			<Results />
+				<Results />
 
-			{hasAverage ? (
-				<Button onClick={handleEnd} text='Start new planning' />
-			) : (
-				<Button
-					onClick={handleReveal}
-					text='Reveal'
-					disabled={participants.some((participant) => participant.vote === 0)}
-				/>
-			)}
-		</section>
+				{hasAverage ? (
+					<Button onClick={handleEnd} text='Start new planning' />
+				) : (
+					<Button
+						onClick={handleReveal}
+						text='Reveal'
+						disabled={participants.some((participant) => participant.vote === 0)}
+					/>
+				)}
+			</section>
+		</Content>
 	)
 }
