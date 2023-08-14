@@ -1,6 +1,6 @@
 import Page from '@/layouts/Page'
 import { db } from '@/firebase-config'
-import { doc, getDoc } from 'firebase/firestore'
+import { arrayUnion, doc, getDoc, setDoc } from 'firebase/firestore'
 import { Planning } from '@/types/planning'
 import EmptyStateGuests from '@/components/empty-state-guest'
 import { usePlanningState } from '@/hooks/planning'
@@ -11,6 +11,7 @@ import CardSelector from '@/components/CardSelector'
 import Content from '@/layouts/Content'
 import ResumeView from '@/components/ResumeView'
 import { PLANNING_REF_WITH_ID } from '@/firebase-config'
+import { useEffect } from 'react'
 
 export async function getServerSideProps(ctx: any) {
 	const { id } = ctx.query
@@ -41,6 +42,18 @@ function Room({ planning: initialPlanning }: Props) {
 
 	const isEmptyParticipants =
 		participants.filter((participant) => participant.name !== initialPlanning.host).length === 0
+
+	useEffect(() => {
+		const isUserInParticipants = initialPlanning.participants.some((participant) => participant.id === user.id)
+
+		if (user.name && !isUserInParticipants) {
+			setDoc(
+				PLANNING_REF_WITH_ID(router.query.id as string),
+				{ participants: arrayUnion({ name: user.name, vote: 0, id: user.id, avatar: 'F1' }) },
+				{ merge: true }
+			)
+		}
+	}, [])
 
 	if (!initialPlanning) return <Page>Room not found</Page>
 	if (isEmptyParticipants) return <EmptyStateGuests planningName={planning.name} />

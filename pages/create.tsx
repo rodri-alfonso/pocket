@@ -5,14 +5,12 @@ import Router from 'next/router'
 import { db } from '@/firebase-config'
 import { collection, addDoc } from 'firebase/firestore'
 import { Planning } from '@/types/planning'
-import { useId } from 'react'
 import { useRegistration } from '@/context/planning'
 import ButtonDouble from '@/theme/button-double'
 import Content from '@/layouts/Content'
 
 export default function Create() {
 	const [planningName, setPlanningName] = useState('')
-	const hostId = useId()
 	const { user, setRegistration } = useRegistration()
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -20,7 +18,7 @@ export default function Create() {
 		if (!planningName) return console.log('Please fill out all fields')
 
 		const payload: Planning = {
-			hostId,
+			hostId: user.id,
 			participants: [{ name: user.name, vote: 0, avatar: 'F1', id: user.id }],
 			host: user.name,
 			average: 0,
@@ -30,7 +28,6 @@ export default function Create() {
 
 		addDoc(collection(db, 'plannings'), payload)
 			.then((response) => {
-				setRegistration({ ...user, planningId: response.id })
 				Router.push(`/planning/${response.id}`)
 			})
 			.catch((error) => {

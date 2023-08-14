@@ -3,8 +3,7 @@ import Input from '@/theme/Input'
 import Page from '@/layouts/Page'
 import { Planning } from '@/types/planning'
 import { useRouter } from 'next/router'
-import { doc, setDoc, arrayUnion } from 'firebase/firestore'
-import { db } from '@/firebase-config'
+import uniqid from 'uniqid'
 import { useRegistration } from '@/context/planning'
 import Button from '@/theme/button'
 import F1 from '@/avatars/F1'
@@ -15,7 +14,6 @@ interface Props {
 
 export default function Register({ planning }: Props) {
 	const [username, setUsername] = useState('')
-	const userId = useId()
 	const router = useRouter()
 	const { setRegistration } = useRegistration()
 
@@ -23,13 +21,7 @@ export default function Register({ planning }: Props) {
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
-		// const docRef = doc(db, 'plannings', planningId)
-		// setDoc(docRef, { participants: arrayUnion({ name: username, vote: 0, avatar: 'F1' }) }, { merge: true }).then(
-		// 	() => {
-		// 		setRegistration({ name: username, id: userId, avatar: 'F1' })
-		// 	}
-		// 	)
-		setRegistration({ name: username, id: userId, avatar: 'F1', planningId: '' })
+		setRegistration({ name: username, id: uniqid(), avatar: 'F1' })
 	}
 
 	return (

@@ -1,6 +1,6 @@
 import { useContext, useReducer, createContext, useEffect } from 'react'
 import { State, User } from './types'
-import { removeStorage, setStorage, storage } from '@/utils/planning-local-storage'
+import { removeStorage, setStorage } from '@/utils/planning-local-storage'
 
 const SET_REGISTRATION_IN = 'SET_REGISTRATION_IN'
 const SET_REGISTRATION_OUT = 'SET_REGISTRATION_OUT'
@@ -10,7 +10,6 @@ const initialState: State = {
 		name: '',
 		id: '',
 		avatar: 'F1',
-		planningId: '',
 	},
 	isRegistered: false,
 }
@@ -39,10 +38,6 @@ const PlanningProvider = ({ children }: any) => {
 
 const useRegistration = () => {
 	const { state, dispatch } = useContext(PlanningContext)
-
-	useEffect(() => {
-		// if (storage) dispatch({ type: SET_REGISTRATION_IN, payload: storage })
-	}, [])
 
 	const setRegistration = (payload: User) => {
 		dispatch({ type: SET_REGISTRATION_IN, payload })

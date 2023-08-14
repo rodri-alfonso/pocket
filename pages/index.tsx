@@ -36,8 +36,9 @@ function Home({ plannings }: Props) {
 		<Page className='flex flex-col justify-between'>
 			<Content>
 				<div className='grid gap-4 place-items-center w-full h-full items-end'>
+					<h3 className='font-semibold'>Active plannings</h3>
 					<section className='h-full w-full flex flex-col items-center gap-8 '>
-						<Alert label={`You have ${leftPlanningCounter} free planning left`} />
+						{/* <Alert label={`You have ${leftPlanningCounter} free planning left`} /> */}
 						<div className='grid place-items-center gap-3 w-full max-w-xs'>
 							{filteredPlannings.map((planning) => (
 								<PlanningCard key={planning.hostId} {...planning} />

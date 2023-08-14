@@ -17,7 +17,7 @@ export default function CardSelector({ participants, revealed, planningName }: a
 		setSelectedCard(selectedCard)
 		const updatedParticipants = participants.filter((participant: any) => participant.name !== user.name)
 		updateDoc(PLANNING_REF_WITH_ID(router.query.id as string), {
-			participants: [...updatedParticipants, { name: user.name, vote: selectedCard }],
+			participants: [...updatedParticipants, { ...user, vote: selectedCard }],
 		})
 	}
 

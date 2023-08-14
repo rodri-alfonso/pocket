@@ -3,9 +3,11 @@ import Input from '@/theme/Input'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useRegistration } from '@/context/planning'
-import { arrayUnion, doc, setDoc, getDoc } from 'firebase/firestore'
-import { db } from '@/firebase-config'
+import { arrayUnion, setDoc, getDoc } from 'firebase/firestore'
+import Content from '@/layouts/Content'
 import { PLANNING_REF_WITH_ID } from '@/firebase-config'
+import Button from '@/theme/button'
+import { Participant } from '@/types/planning'
 
 interface Props {
 	planningName: string
@@ -14,7 +16,7 @@ interface Props {
 export default function EmptyStateGuests({ planningName }: Props) {
 	const router = useRouter()
 	const planningLink = `${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}`
-	const { user, setRegistration } = useRegistration()
+	const { user } = useRegistration()
 	const docRef = PLANNING_REF_WITH_ID(router.query.id as string)
 
 	useEffect(() => {
@@ -22,18 +24,16 @@ export default function EmptyStateGuests({ planningName }: Props) {
 		getDoc(docRef).then((res) => {
 			if (!res.exists()) return
 
-			if (res.data().participants.some((participant) => participant.id === user.id)) {
-				console.log('YA estaba')
-				// setRegistration(user)
-			} else {
-				console.log('NO estaba')
+			const isUserInParticipants = res
+				.data()
+				.participants.some((participant: Participant) => participant.id === user.id)
+
+			if (user.name && !isUserInParticipants) {
 				setDoc(
 					docRef,
 					{ participants: arrayUnion({ name: user.name, vote: 0, id: user.id, avatar: 'F1' }) },
 					{ merge: true }
-				).then(() => {
-					setRegistration(user)
-				})
+				)
 			}
 		})
 	}, [])
@@ -44,13 +44,18 @@ export default function EmptyStateGuests({ planningName }: Props) {
 		})
 	}
 
+	// if (isLoading) return <div>Loading...</div>
+
 	return (
 		<Page>
-			<span>hey, maybe you have to invite guests to your planning</span>
-			<Input value={planningLink} label='' placeholder='' onChange={(e) => {}} />
-			<button className='bg-gray-200 p-2' onClick={handleCopyLink}>
-				Copy invitation link
-			</button>
+			<Content>
+				<h2 className='font-medium text-center'>Invite guests to your planning</h2>
+
+				<div className='grid gap-4 pt-6'>
+					<Input value={planningLink} label='Invitation link' placeholder='' onChange={(e) => {}} />
+					<Button text='Copy on clipboard' onClick={handleCopyLink} />
+				</div>
+			</Content>
 		</Page>
 	)
 }
