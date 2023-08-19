@@ -1,6 +1,7 @@
 import F1 from '@/avatars/F1'
 import { Participant } from '@/types/planning'
 import { useRegistration } from '@/context/planning'
+import CheckIcon from '@/assets/icons/Check'
 
 interface Props {
 	participants: Participant[]
@@ -25,7 +26,7 @@ export default function Participants({ participants, average }: Props) {
 					</span>
 					{Boolean(participant.vote) && (
 						<span className='bg-gray-900 w-6 h-6 grid place-items-center rounded-full absolute -top-1 -left-1 text-white font-bold text-xs'>
-							{Boolean(average) ? participant.vote : 'ok'}
+							{Boolean(average) ? participant.vote : <CheckIcon className='w-2.5 h-2.5 text-white' />}
 						</span>
 					)}
 				</div>

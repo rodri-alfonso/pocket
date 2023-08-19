@@ -1,23 +1,14 @@
-import { useState, useId } from 'react'
+import { useState } from 'react'
 import Input from '@/theme/Input'
 import Page from '@/layouts/Page'
-import { Planning } from '@/types/planning'
-import { useRouter } from 'next/router'
 import uniqid from 'uniqid'
 import { useRegistration } from '@/context/planning'
 import Button from '@/theme/button'
 import F1 from '@/avatars/F1'
 
-interface Props {
-	planning: Planning
-}
-
-export default function Register({ planning }: Props) {
+export default function Register() {
 	const [username, setUsername] = useState('')
-	const router = useRouter()
 	const { setRegistration } = useRegistration()
-
-	const planningId = router.query.id as string
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
