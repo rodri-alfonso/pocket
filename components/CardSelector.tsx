@@ -20,6 +20,8 @@ export default function CardSelector({ participants, revealed, planningName }: a
 		})
 	}
 
+	const supportText = selectedCard ? 'You have picked a card to vote' : 'Pick a card and vote!'
+
 	return (
 		<Content className='flex flex-col justify-between relative'>
 			<div className='grid gap-6 h-full content-between place-items-center'>
@@ -30,7 +32,9 @@ export default function CardSelector({ participants, revealed, planningName }: a
 					</span>
 				</section>
 
-				<h2 className='text-center font-medium text-gray-400'>Pick a card and vote!</h2>
+				<h2 className={`text-center transition-all font-medium ${selectedCard ? 'text-gray-800' : 'text-gray-400'}`}>
+					{supportText}
+				</h2>
 				<section className='grid grid-cols-3 gap-4 w-full place-items-center max-w-xs'>
 					{cards.map((card, idx) => (
 						<button
