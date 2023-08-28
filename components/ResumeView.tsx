@@ -1,35 +1,33 @@
 import { Participant } from '@/types/planning'
 import Button from '@/theme/button'
-import { updateDoc } from 'firebase/firestore'
 import { useRouter } from 'next/router'
-import { PLANNING_REF_WITH_ID } from '@/firebase-config'
 import Content from '@/layouts/Content'
 import Results from './ResumeView/Results'
 import Participants from './ResumeView/Participants'
+import planningService from '@/services/planning'
 
 interface Props {
 	participants: Participant[]
 	average: number
 }
 
+const { setAverage, resetPlanning } = planningService
+
 export default function ResumeView({ participants, average }: Props) {
 	const router = useRouter()
-	const docRef = PLANNING_REF_WITH_ID(router.query.id as string)
+	const plnningId = router.query.id as string
 	const hasAverage = Boolean(average)
 
 	function handleReveal() {
 		const average = participants.reduce((acc, participant) => acc + participant.vote, 0) / participants.length
-
-		updateDoc(docRef, {
-			average,
-		})
+		setAverage(plnningId, average)
 	}
 
 	function handleEnd() {
-		updateDoc(docRef, {
-			average: 0,
-			participants: participants.map((participant) => ({ ...participant, vote: 0 })),
-		})
+		resetPlanning(
+			plnningId,
+			participants.map((participant) => ({ ...participant, vote: 0 }))
+		)
 	}
 
 	return (

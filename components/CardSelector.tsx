@@ -5,6 +5,9 @@ import { useRouter } from 'next/router'
 import { useRegistration } from '@/context/planning'
 import { PLANNING_REF_WITH_ID } from '@/firebase-config'
 import Content from '@/layouts/Content'
+import Link from 'next/link'
+import HomeIcon from '@/assets/icons/Home'
+import ShareIcon from '@/assets/icons/Share'
 
 export default function CardSelector({ participants, revealed, planningName }: any) {
 	const cards = useCards()
@@ -25,8 +28,20 @@ export default function CardSelector({ participants, revealed, planningName }: a
 	return (
 		<Content className='flex flex-col justify-between relative'>
 			<div className='grid gap-6 h-full content-between place-items-center'>
-				<section className='grid place-items-center gap-2'>
-					<h1 className='text-center font-bold text-lg capitalize'>{planningName} planning</h1>
+				<section className='grid place-items-center gap-2 w-full'>
+					<div className='flex justify-between items-center w-full'>
+						<Link
+							href='/'
+							className='w-9 h-9 border border-solid border-gray-200 rounded-md bg-gray-50 grid place-items-center active:scale-95 transition-all hover:bg-gray-800 text-gray-700 hover:text-white '
+						>
+							<HomeIcon className='w-4 h-4 ' />
+						</Link>
+						<h1 className='text-center font-bold text-lg capitalize'>{planningName} planning</h1>
+						<button className='w-9 h-9 border border-solid border-gray-200  rounded-md bg-gray-50 grid place-items-center active:scale-95 transition-all hover:bg-gray-800 text-gray-700 hover:text-white '>
+							<ShareIcon className='w-4 -ml-0.5' />
+						</button>
+					</div>
+
 					<span className='bg-gray-200  text-gray-500 font-semibold text-xs rounded-full px-2.5 py-1'>
 						{participants.length} participants
 					</span>

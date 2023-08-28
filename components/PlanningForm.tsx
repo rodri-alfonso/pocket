@@ -1,11 +1,10 @@
 import Input from '@/theme/Input'
 import { useState } from 'react'
 import Router from 'next/router'
-import { db } from '@/firebase-config'
-import { collection, addDoc } from 'firebase/firestore'
 import { Planning } from '@/types/planning'
 import { useRegistration } from '@/context/planning'
 import ButtonDouble from '@/theme/button-double'
+import planningService from '@/services/planning'
 
 export default function PlanningForm() {
 	const [planningName, setPlanningName] = useState('')
@@ -24,13 +23,7 @@ export default function PlanningForm() {
 			votingSystem: 'fibonacci',
 		}
 
-		addDoc(collection(db, 'plannings'), payload)
-			.then((response) => {
-				Router.push(`/planning/${response.id}`)
-			})
-			.catch((error) => {
-				console.log(error)
-			})
+		planningService.createDocument(payload).then((response: any) => Router.push(`/planning/${response.id}`))
 	}
 
 	return (

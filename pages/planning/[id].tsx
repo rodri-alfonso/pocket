@@ -51,7 +51,7 @@ function Room({ planning: initialPlanning }: Props) {
 	}, [])
 
 	if (!initialPlanning) return <Page>Room not found</Page>
-	if (isEmptyParticipants) return <EmptyStateGuests planningName={planning.name} />
+	if (isEmptyParticipants) return <EmptyStateGuests />
 
 	const currentParticipant = participants.find((participant) => participant.name === user.name)
 
