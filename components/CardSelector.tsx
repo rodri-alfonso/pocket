@@ -8,10 +8,12 @@ import Content from '@/layouts/Content'
 import Link from 'next/link'
 import HomeIcon from '@/assets/icons/Home'
 import ShareIcon from '@/assets/icons/Share'
+import Alert from '@/theme/alert'
 
 export default function CardSelector({ participants, revealed, planningName }: any) {
 	const cards = useCards()
 	const [selectedCard, setSelectedCard] = useState(0)
+	const [isAlertOpen, setIsAlertOpen] = useState(false)
 	const router = useRouter()
 	const { user } = useRegistration()
 
@@ -20,6 +22,12 @@ export default function CardSelector({ participants, revealed, planningName }: a
 		const updatedParticipants = participants.filter((participant: any) => participant.name !== user.name)
 		updateDoc(PLANNING_REF_WITH_ID(router.query.id as string), {
 			participants: [...updatedParticipants, { ...user, vote: selectedCard }],
+		})
+	}
+
+	function handleShare() {
+		navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}`).then(() => {
+			setIsAlertOpen(true)
 		})
 	}
 
@@ -37,7 +45,10 @@ export default function CardSelector({ participants, revealed, planningName }: a
 							<HomeIcon className='w-4 h-4 ' />
 						</Link>
 						<h1 className='text-center font-bold text-lg capitalize'>{planningName} planning</h1>
-						<button className='w-9 h-9 border border-solid border-gray-200  rounded-md bg-gray-50 grid place-items-center active:scale-95 transition-all hover:bg-gray-800 text-gray-700 hover:text-white '>
+						<button
+							onClick={handleShare}
+							className='w-9 h-9 border border-solid border-gray-200  rounded-md bg-gray-50 grid place-items-center active:scale-95 transition-all hover:bg-gray-800 text-gray-700 hover:text-white '
+						>
 							<ShareIcon className='w-4 -ml-0.5' />
 						</button>
 					</div>
@@ -72,6 +83,7 @@ export default function CardSelector({ participants, revealed, planningName }: a
 					Vote
 				</button>
 			</div>
+			{isAlertOpen && <Alert isOpen={isAlertOpen} onClose={() => setIsAlertOpen(false)} label='Copied to clipboard!' />}
 		</Content>
 	)
 }

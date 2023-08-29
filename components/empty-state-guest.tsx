@@ -1,15 +1,17 @@
 import Page from '@/layouts/Page'
 import Input from '@/theme/Input'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRegistration } from '@/context/planning'
 import Content from '@/layouts/Content'
 import Button from '@/theme/button'
 import { Participant } from '@/types/planning'
 import planningService from '@/services/planning'
+import Alert from '@/theme/alert'
 
 export default function EmptyStateGuests() {
 	const router = useRouter()
+	const [isAlertOpen, setIsAlertOpen] = useState(false)
 	const planningLink = `${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}`
 	const { user } = useRegistration()
 	const planningId = router.query.id as string
@@ -32,21 +34,21 @@ export default function EmptyStateGuests() {
 
 	function handleCopyLink() {
 		navigator.clipboard.writeText(planningLink).then(() => {
-			alert('copied')
+			setIsAlertOpen(true)
 		})
 	}
 
-	// if (isLoading) return <div>Loading...</div>
-
 	return (
 		<Page>
-			<Content>
+			<Content className='relative'>
 				<h2 className='font-medium text-center'>Invite guests to your planning</h2>
-
 				<div className='grid gap-4 pt-6'>
 					<Input value={planningLink} label='Invitation link' placeholder='' onChange={(e) => {}} />
 					<Button text='Copy on clipboard' onClick={handleCopyLink} />
 				</div>
+				{isAlertOpen && (
+					<Alert isOpen={isAlertOpen} onClose={() => setIsAlertOpen(false)} label='Copied to clipboard!' />
+				)}
 			</Content>
 		</Page>
 	)
