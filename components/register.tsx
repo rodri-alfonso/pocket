@@ -5,14 +5,17 @@ import uniqid from 'uniqid'
 import { useRegistration } from '@/context/planning'
 import Button from '@/theme/button'
 import F1 from '@/avatars/F1'
+import { useRouter } from 'next/router'
 
 export default function Register() {
 	const [username, setUsername] = useState('')
-	const { setRegistration } = useRegistration()
+	const router = useRouter()
+	const { setRegistration, setCurrentPlanning } = useRegistration()
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
 		setRegistration({ name: username, id: uniqid(), avatar: 'F1' })
+		// setCurrentPlanning(router.query.id as string)
 	}
 
 	return (

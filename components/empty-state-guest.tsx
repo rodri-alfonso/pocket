@@ -8,6 +8,7 @@ import Button from '@/theme/button'
 import { Participant } from '@/types/planning'
 import planningService from '@/services/planning'
 import Alert from '@/theme/alert'
+import { setStorage, storage } from '@/utils/planning-local-storage'
 
 export default function EmptyStateGuests() {
 	const router = useRouter()
@@ -28,6 +29,8 @@ export default function EmptyStateGuests() {
 
 			if (user.name && !isUserInParticipants) {
 				addParticipant(planningId, { name: user.name, vote: 0, id: user.id, avatar: 'F1' })
+
+				setStorage({ ...user, concurrentPlannings: [planningId] })
 			}
 		})
 	}, [])

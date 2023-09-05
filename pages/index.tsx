@@ -1,5 +1,6 @@
 import Page from '@/layouts/Page'
 import Link from '@/theme/button-link'
+import * as NextLink from 'next/link'
 import Content from '@/layouts/Content'
 import withAuth from '@/utils/with-auth'
 import { useRegistration } from '@/context/planning'
@@ -22,22 +23,44 @@ export async function getServerSideProps() {
 }
 
 function Home({ plannings }: Props) {
-	const { user } = useRegistration()
-	const filteredPlannings = plannings.filter((planning) => planning.hostId === user.id)
+	const { user, concurrentPlannings } = useRegistration()
+
+	const createdPlannings = plannings.filter((planning) => planning.hostId === user.id)
+	const lastPlannings = plannings.filter(
+		(planning) => !concurrentPlannings.includes(planning.id) && planning.hostId !== user.id
+	)
 
 	return (
 		<Page className='flex flex-col justify-between'>
 			<Content>
-				<div className='grid gap-4 place-items-center w-full h-full items-end'>
-					<h3 className='font-semibold'>Active plannings</h3>
-					<section className='h-full w-full flex flex-col items-center gap-8 '>
-						<div className='grid place-items-center gap-3 w-full max-w-xs'>
-							{filteredPlannings.map((planning) => (
+				<div className='grid gap-8 w-full h-full'>
+					<section className='flex flex-col gap-3 overflow-hidden'>
+						<h3 className='font-semibold pl-1'>Created plannings</h3>
+						<div className='grid place-items-center gap-3 w-full  overflow-y-auto rounded-xl '>
+							<NextLink.default
+								href='/create'
+								className='flex  justify-between h-full rounded-2xl text-gray-800 border-solid border border-gray-200 p-6 w-full active:scale-95 transition-all  hover:shadow-md'
+							>
+								Create planning
+							</NextLink.default>
+							{createdPlannings.map((planning) => (
 								<PlanningCard key={planning.hostId} {...planning} />
 							))}
 						</div>
 					</section>
-					<Link href='/create' label='Create Planning' />
+
+					{!!lastPlannings.length && (
+						<section className='flex flex-col gap-3 overflow-hidden'>
+							<h3 className='font-semibold pl-1'>Last plannings</h3>
+							<div className='grid place-items-center gap-3 w-full h-5/6  overflow-y-auto rounded-xl '>
+								{lastPlannings.map((planning) => (
+									<PlanningCard key={planning.hostId} {...planning} />
+								))}
+							</div>
+						</section>
+					)}
+
+					<Link href='/create' label='Create Planning' className='mt-auto mx-auto' />
 				</div>
 			</Content>
 		</Page>

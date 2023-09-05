@@ -10,6 +10,7 @@ import CardSelector from '@/components/CardSelector'
 import ResumeView from '@/components/ResumeView'
 import { PLANNING_REF_WITH_ID } from '@/firebase-config'
 import { useEffect } from 'react'
+import { setStorage, storage } from '@/utils/planning-local-storage'
 
 export async function getServerSideProps(ctx: any) {
 	const { id } = ctx.query
@@ -47,6 +48,7 @@ function Room({ planning: initialPlanning }: Props) {
 				{ participants: arrayUnion({ name: user.name, vote: 0, id: user.id, avatar: 'F1' }) },
 				{ merge: true }
 			)
+			setStorage({ ...user, concurrentPlannings: [storage.currentPlannings, planningId] })
 		}
 	}, [])
 

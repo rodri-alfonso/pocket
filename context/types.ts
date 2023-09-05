@@ -9,4 +9,5 @@ export type User = {
 export interface State {
 	user: User
 	isRegistered: boolean
+	concurrentPlannings: string[]
 }

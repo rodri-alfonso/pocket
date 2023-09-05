@@ -15,7 +15,8 @@ export default function withAuth(Component: any) {
 
 		useEffect(() => {
 			const storage = JSON.parse(
-				localStorage.getItem(ENVIRONMENTS.STORAGE_KEY) || '{"name": "", "id": "", "avatar": "F1"}'
+				localStorage.getItem(ENVIRONMENTS.STORAGE_KEY) ||
+					'{"name": "", "id": "", "avatar": "F1", "concurrentPlannings": "[]"}'
 			)
 
 			if (storage.name) setRegistration(storage)
@@ -24,7 +25,7 @@ export default function withAuth(Component: any) {
 		}, [])
 
 		if (isLoading) return <span>Loading...</span>
-		if (!user.name) return <Register planning={props.planning} />
+		if (!user.name) return <Register />
 		return <Component {...props} />
 	}
 

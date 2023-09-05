@@ -8,6 +8,7 @@ export const ENVIRONMENTS = {
 
 	BASE_URL: process.env.NEXT_PUBLIC_BASE_URL || '',
 	STORAGE_KEY: process.env.NEXT_PUBLIC_STORAGE_KEY || '',
+	PLANNING_STORAGE_KEY: process.env.NEXT_PUBLIC_PLANNING_STORAGE_KEY || '',
 }
 
 export const isSSR = typeof window === 'undefined'
