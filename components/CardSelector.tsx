@@ -61,7 +61,7 @@ export default function CardSelector({ participants, revealed, planningName }: a
 				<h2 className={`text-center transition-all font-medium ${selectedCard ? 'text-gray-800' : 'text-gray-400'}`}>
 					{supportText}
 				</h2>
-				<section className='grid grid-cols-3 gap-4 w-full place-items-center max-w-xs'>
+				<section className='grid grid-cols-3 gap-4 w-full place-items-center max-w-xs overflow-y-auto h-full'>
 					{cards.map((card, idx) => (
 						<button
 							className={`border-solid border text-xl grid place-items-center rounded-lg py-8 w-20 font-semibold transition-all active:scale-95 hover:border-gray-500 ${
