@@ -40,7 +40,12 @@ export default function Results({ participants, hasAverage, average }: Props) {
 
 		const RevealedCards = () => {
 			return getParticipantsVoteCount(participants).map(([vote, voteCount], index) => (
-				<Card key={voteCount + index} vote={Number(vote)} isRevealed={hasAverage} count={voteCount} />
+				<Card
+					key={voteCount + index}
+					vote={typeof vote === 'string' ? vote : Number(vote)}
+					isRevealed={hasAverage}
+					count={voteCount}
+				/>
 			))
 		}
 

@@ -7,13 +7,15 @@ interface Props extends Planning {
 }
 
 export default function PlanningCard({ id, name, participants, votingSystem }: Props) {
+	const planningName = name.toLowerCase().includes('planning') ? name : `${name} planning`
+
 	return (
 		<Link
 			href={`/planning/${id}`}
 			className='flex bg-white justify-between h-full rounded-2xl text-gray-800 border-solid border border-gray-200 p-6 w-full active:scale-95 transition-all  hover:shadow-md'
 		>
 			<div className='grid items-center gap-6'>
-				<h2 className='font-semibold'>#1 {name}</h2>
+				<h2 className='font-semibold'>{planningName}</h2>
 
 				<div className='flex items-center gap-2'>
 					<div className='flex items-center '>

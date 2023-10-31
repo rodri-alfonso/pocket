@@ -6,7 +6,7 @@ import { useRegistration } from '@/context/planning'
 import ButtonDouble from '@/theme/button-double'
 import planningService from '@/services/planning'
 
-export default function PlanningForm() {
+export default function PlanningForm({ onClose }: any) {
 	const [planningName, setPlanningName] = useState('')
 	const { user } = useRegistration()
 
@@ -42,7 +42,7 @@ export default function PlanningForm() {
 				labelSecondary='Cancel'
 				disabled={!planningName}
 				onClickPrimary={() => {}}
-				onClickSecondary={() => Router.push('/')}
+				onClickSecondary={onClose}
 			/>
 		</form>
 	)

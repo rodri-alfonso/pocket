@@ -31,7 +31,7 @@ const planningReducer = (state: State, action: any): State => {
 		case SET_REGISTRATION_IN:
 			return { ...state, user: action.payload }
 		case SET_REGISTRATION_OUT:
-			return state
+			return initialState
 		default:
 			return state
 	}

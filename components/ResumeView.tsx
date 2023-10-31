@@ -19,7 +19,10 @@ export default function ResumeView({ participants, average }: Props) {
 	const hasAverage = Boolean(average)
 
 	function handleReveal() {
-		const average = participants.reduce((acc, participant) => acc + participant.vote, 0) / participants.length
+		const filteredParticipants = participants.filter((participant) => typeof participant.vote !== 'string')
+		console.log('🚀 ~ file: ResumeView.tsx:23 ~ filteredParticipants:', filteredParticipants)
+		const average = filteredParticipants.reduce((acc, participant) => acc + participant.vote, 0) / participants.length
+
 		setAverage(plnningId, average)
 	}
 

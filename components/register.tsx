@@ -19,29 +19,39 @@ export default function Register() {
 	}
 
 	return (
-		<Page className=''>
-			<div className='h-full flex flex-col gap-4'>
+		<Page className='grid place-items-center'>
+			<div className='h-3/4 w-full bg-gray-100 flex flex-col gap-4 rounded-2xl p-6'>
 				<picture className='grid gap-2 place-items-center'>
 					<F1 />
 					<h3 className='font-semibold h-5 capitalize text-sm'>{username}</h3>
 				</picture>
-				<div className='rounded-3xl bg-gray-50 h-5/6 overflow-hidden'>
-					<form onSubmit={handleSubmit} className='flex flex-col justify-between items-center h-full p-6'>
-						<div className='w-full grid gap-10 text-center'>
-							<div className=' w-full rounded-3xl grid gap-6'>
-								<h2 className='font-semibold text-lg text-black'>Welcome{username && `, ${username}`}</h2>
-								<Input
-									label='Choose a Nickname'
-									placeholder='Type you nickname...'
-									value={username}
-									onChange={(e) => setUsername(e.target.value)}
-								/>
-							</div>
+				<form onSubmit={handleSubmit} className='flex flex-col justify-between items-center h-full p-6'>
+					<div className='w-full grid gap-10 text-center'>
+						<div className=' w-full rounded-3xl grid gap-6'>
+							<h2 className='font-semibold text-lg text-black'>Welcome{username && `, ${username}`}</h2>
+							<Input
+								label='Choose a Nickname'
+								placeholder='Type you nickname...'
+								value={username}
+								onChange={(e) => setUsername(e.target.value)}
+							/>
 						</div>
-						<Button text='Continue' disabled={!username} onClick={() => {}} className='w-full max-w-xs mx-auto' />
-					</form>
-				</div>
+					</div>
+					<Button text='Continue' disabled={!username} onClick={() => {}} className='w-full' />
+				</form>
 			</div>
 		</Page>
 	)
 }
+
+/*
+
+GUARDAR SESIONES:
+
+Logearte, crear un perfil, plannings, etc y cuando te desologuees, que se guarde en localstorage tus datos y cuando vuelvas a entrar, te pregunte si queres usar
+ese perfil u crear uno nuevo. Si seleccionas otro perfil, ese perfil se borra con todo lo que tenga. 
+
+O caso contrario, que en el splash, te aparezca el perfil y una cruz para eliminarlo. 
+
+O cuando alguien se desloguee, que se borre TODO lo que tenía ésa cuenta. 
+ */
