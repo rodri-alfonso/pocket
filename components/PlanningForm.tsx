@@ -28,7 +28,7 @@ export default function PlanningForm({ onClose }: any) {
 	}
 
 	return (
-		<form onSubmit={handleSubmit} className='flex flex-col justify-between h-full w-full max-w-xs'>
+		<form onSubmit={handleSubmit} className='flex flex-col justify-between h-full w-full max-w-xs mx-auto'>
 			<div className='flex flex-col gap-8 items-center'>
 				<Avatar type='F1' name={user.name} />
 				<h1 className='font-medium text-gray-600 text-lg'>Let's create a planning</h1>

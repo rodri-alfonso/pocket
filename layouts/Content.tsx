@@ -80,7 +80,7 @@ export default function Content({ children, className = '' }: Props) {
 				{/* {router.asPath !== '/' && <NavigatorBar />} */}
 			</div>
 			{/* {router.asPath !== '/' ? <NavigatorBar /> : <Header />} */}
-			{children}
+			<div className={className}>{children}</div>
 		</div>
 	)
 }

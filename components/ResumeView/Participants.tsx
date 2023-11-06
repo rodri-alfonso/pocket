@@ -6,6 +6,7 @@ import { useState } from 'react'
 import Modal from '@/theme/modal'
 import planningService from '@/services/planning'
 import { useRouter } from 'next/router'
+import OptionsModal from '../OptionsModal'
 
 interface Props {
 	participants: Participant[]
@@ -21,7 +22,6 @@ export default function Participants({ participants, average, hostId }: Props) {
 	const isHost = user.id === hostId
 
 	function handleDelete() {
-		console.log('deleted', selectedParticipant)
 		setSelectedParticipant(null)
 		planningService.deleteParticipant(router.query.id as string, selectedParticipant.id, participants)
 	}
@@ -51,22 +51,15 @@ export default function Participants({ participants, average, hostId }: Props) {
 				</button>
 			))}
 			{Boolean(selectedParticipant) && (
-				<Modal isOpen={Boolean(selectedParticipant)} onClose={() => {}} className='h-auto'>
-					<div className='bg-gray-100 p-4'>
-						<p>Quieres expulsar a {selectedParticipant?.name}?</p>
-						<div className='flex gap-4'>
-							<button className='bg-blue-300 text-white px-4 py-2 rounded-lg' onClick={handleDelete}>
-								Si, expulsar
-							</button>
-							<button
-								className='border border-solid border-blue-300 px-4 py-2 rounded-lg'
-								onClick={() => setSelectedParticipant(null)}
-							>
-								Cancelar
-							</button>
-						</div>
-					</div>
-				</Modal>
+				<OptionsModal
+					isOpen={Boolean(selectedParticipant)}
+					onClose={() => setSelectedParticipant(null)}
+					labelPrimary='Expel'
+					labelSecondary='Cancel'
+					onClickPrimary={handleDelete}
+					onClickSecondary={() => setSelectedParticipant(null)}
+					title={`Do you want to expel ${selectedParticipant?.name}?`}
+				/>
 			)}
 		</section>
 	)

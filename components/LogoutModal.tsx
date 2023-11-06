@@ -3,7 +3,6 @@ import Modal from '@/theme/modal'
 import { useState } from 'react'
 import { useRegistration } from '@/context/planning'
 import CloseIcon from '@/assets/icons/Close'
-import ButtonDouble from '@/theme/button-double'
 
 export default function LogoutModal() {
 	const [isOpen, setIsOpen] = useState(false)
@@ -25,20 +24,20 @@ export default function LogoutModal() {
 					>
 						<CloseIcon />
 					</button>
-					<div className='grid justify-center h-full gap-6 py-6 w-4/5 mx-auto'>
+					<div className='grid justify-center h-full gap-6 py-5 w-4/5 mx-auto'>
 						<span className='text-center pb-2 font-semibold text-xl'>Settings</span>
-						<div className='w-56 font-semibold'>
+						<div className='w-full px-8 font-semibold'>
 							<button
 								className='mb-3 bg-gray-800 text-white px-9 w-full py-2 rounded-xl active:scale-95 transition-all'
 								onClick={deleteRegistration}
 							>
-								Log out
+								Logout
 							</button>
 							<button
-								className='border border-solid hover:border-gray-200 hover:underline hover:text-gray-700 border-gray-300 text-gray-500 px-9 py-2  w-full rounded-xl active:scale-95 transition-all'
+								className='border border-solid hover:border-gray-400 hover:text-gray-700 border-gray-300 text-gray-500 px-9 py-2  w-full rounded-xl active:scale-95 transition-all'
 								onClick={() => setIsOpen(false)}
 							>
-								Delete account
+								Cancel
 							</button>
 						</div>
 					</div>

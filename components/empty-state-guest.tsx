@@ -49,11 +49,11 @@ export default function EmptyStateGuests() {
 					<F1 />
 					<h3 className='font-semibold h-5 capitalize text-sm'>{user.name}</h3>
 				</picture>
-				<div className='relative'>
-					<h2 className='font-medium text-gray-700 py-0.5 bg-gray-100 rounded-full max-w-xs mx-auto text-center'>
-						Invite guests to your new planning
-					</h2>
-					<div className='grid gap-2 pt-10 px-6'>
+				<h2 className='font-medium mb-4 text-gray-700 py-0.5 bg-gray-100 rounded-full px-5 mx-auto text-center'>
+					Invite guests to your new planning
+				</h2>
+				<div className='relative bg-gray-50 rounded-lg py-4'>
+					<div className='grid gap-2 px-6'>
 						<Input value={planningLink} label='Invitation link' placeholder='' onChange={(e) => {}} />
 						<Button text='Copy on clipboard' onClick={handleCopyLink} />
 					</div>

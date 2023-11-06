@@ -33,8 +33,8 @@ export default function ResumeView({ participants, average }: Props) {
 	}
 
 	return (
-		<Content className='flex flex-col justify-between relative'>
-			<div className='h-full  flex flex-col justify-between'>
+		<Content className='flex h-full flex-col justify-between relative'>
+			<div className='h-full pt-4 flex flex-col justify-between'>
 				<Participants participants={participants} average={average} />
 				<Results average={average} hasAverage={hasAverage} participants={participants} />
 
