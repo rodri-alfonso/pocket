@@ -18,7 +18,7 @@ export default function ButtonDouble({
 	disabled = false,
 }: ButtonProps) {
 	return (
-		<section className={`grid gap-2.5 w-full max-w-xs mx-auto  ${className}`}>
+		<section className={`grid gap-2.5 w-full ${className}`}>
 			<button
 				className={`bg-gray-800 disabled:opacity-30 disabled:active:scale-100 text-white font-medium px-2 py-3  rounded-md text-center active:scale-95 transition-all`}
 				onClick={onClickPrimary}
