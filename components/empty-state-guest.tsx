@@ -9,6 +9,7 @@ import { Participant } from '@/types/planning'
 import planningService from '@/services/planning'
 import Alert from '@/theme/alert'
 import { setStorage, storage } from '@/utils/planning-local-storage'
+import F1 from '@/avatars/F1'
 
 export default function EmptyStateGuests() {
 	const router = useRouter()
@@ -42,16 +43,22 @@ export default function EmptyStateGuests() {
 	}
 
 	return (
-		<Page>
-			<Content className='relative'>
-				<h2 className='font-medium text-center'>Invite guests to your planning</h2>
-				<div className='grid gap-4 pt-6'>
-					<Input value={planningLink} label='Invitation link' placeholder='' onChange={(e) => {}} />
-					<Button text='Copy on clipboard' onClick={handleCopyLink} />
+		<Page className='p-10'>
+			<Content>
+				<picture className='grid gap-2 place-items-center pb-4'>
+					<F1 />
+					<h3 className='font-semibold h-5 capitalize text-sm'>{user.name}</h3>
+				</picture>
+				<div className='relative'>
+					<h2 className='font-medium text-center'>Invite guests to your planning</h2>
+					<div className='grid gap-4 pt-6'>
+						<Input value={planningLink} label='Invitation link' placeholder='' onChange={(e) => {}} />
+						<Button text='Copy on clipboard' onClick={handleCopyLink} />
+					</div>
+					{isAlertOpen && (
+						<Alert isOpen={isAlertOpen} onClose={() => setIsAlertOpen(false)} label='Copied to clipboard!' />
+					)}
 				</div>
-				{isAlertOpen && (
-					<Alert isOpen={isAlertOpen} onClose={() => setIsAlertOpen(false)} label='Copied to clipboard!' />
-				)}
 			</Content>
 		</Page>
 	)

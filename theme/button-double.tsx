@@ -3,8 +3,8 @@ import Button from './button'
 interface ButtonProps {
 	labelPrimary: string
 	labelSecondary: string
-	onClickPrimary: () => void
-	onClickSecondary: () => void
+	onClickPrimary?: () => void
+	onClickSecondary?: () => void
 	className?: string
 	disabled?: boolean
 }
@@ -12,8 +12,8 @@ interface ButtonProps {
 export default function ButtonDouble({
 	labelPrimary,
 	labelSecondary,
-	onClickPrimary,
-	onClickSecondary,
+	onClickPrimary = () => {},
+	onClickSecondary = () => {},
 	className = '',
 	disabled = false,
 }: ButtonProps) {

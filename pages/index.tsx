@@ -1,6 +1,4 @@
 import Page from '@/layouts/Page'
-import Link from '@/theme/button-link'
-import * as NextLink from 'next/link'
 import Content from '@/layouts/Content'
 import withAuth from '@/utils/with-auth'
 import { useRegistration } from '@/context/planning'
@@ -8,6 +6,10 @@ import { getDocs, collection } from 'firebase/firestore'
 import { db } from '@/firebase-config'
 import { Planning } from '@/types/planning'
 import PlanningCard from '@/components/PlanningCard'
+import PlusIcon from '@/assets/icons/Plus'
+import EmptyStatePlannings from '@/components/empty-state-plannings'
+import PlanningForm from '@/components/PlanningForm'
+import { useState } from 'react'
 
 interface Props {
 	plannings: Array<Planning & { id: string }>
@@ -23,45 +25,43 @@ export async function getServerSideProps() {
 }
 
 function Home({ plannings }: Props) {
-	const { user, concurrentPlannings } = useRegistration()
-
+	const { user } = useRegistration()
+	const [isOpen, setIsOpen] = useState(false)
 	const createdPlannings = plannings.filter((planning) => planning.hostId === user.id)
-	const lastPlannings = plannings.filter(
-		(planning) => !concurrentPlannings.includes(planning.id) && planning.hostId !== user.id
-	)
+
+	if (isOpen)
+		return (
+			<Page className='flex flex-col justify-between'>
+				<PlanningForm onClose={() => setIsOpen(false)} />
+			</Page>
+		)
 
 	return (
 		<Page className='flex flex-col justify-between'>
 			<Content>
-				<div className='grid gap-8 w-full h-full'>
-					<section className='flex flex-col gap-3 overflow-hidden'>
-						<h3 className='font-semibold pl-1'>Created plannings</h3>
-						<div className='grid place-items-center gap-3 w-full  overflow-y-auto rounded-xl '>
-							<NextLink.default
-								href='/create'
-								className='flex  justify-between h-full rounded-2xl text-gray-800 border-solid border border-gray-200 p-6 w-full active:scale-95 transition-all  hover:shadow-md'
-							>
-								Create planning
-							</NextLink.default>
-							{createdPlannings.map((planning) => (
-								<PlanningCard key={planning.hostId} {...planning} />
-							))}
-						</div>
-					</section>
+				{isOpen ? (
+					<PlanningForm onClose={() => setIsOpen(false)} />
+				) : (
+					<div className='grid py-12 gap-8 w-full h-full relative'>
+						<section className='flex flex-col gap-6'>
+							<div className='flex justify-between items-center'>
+								<h3 className='text-xl font-bold pl-1'>My plannings</h3>
+								<button
+									onClick={() => setIsOpen(true)}
+									className='w-9 h-9 rounded-md bg-gray-800 active:scale-95 transition-all text-white font-bold grid place-items-center shadow-md'
+								>
+									<PlusIcon className='w-3.5 h-3.5' />
+								</button>
+							</div>
 
-					{!!lastPlannings.length && (
-						<section className='flex flex-col gap-3 overflow-hidden'>
-							<h3 className='font-semibold pl-1'>Last plannings</h3>
-							<div className='grid place-items-center gap-3 w-full h-5/6  overflow-y-auto rounded-xl '>
-								{lastPlannings.map((planning) => (
+							<div className='grid place-items-center gap-3 w-full rounded-xl '>
+								{createdPlannings.map((planning) => (
 									<PlanningCard key={planning.hostId} {...planning} />
 								))}
 							</div>
 						</section>
-					)}
-
-					<Link href='/create' label='Create Planning' className='mt-auto mx-auto' />
-				</div>
+					</div>
+				)}
 			</Content>
 		</Page>
 	)

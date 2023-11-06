@@ -11,6 +11,7 @@ import ResumeView from '@/components/ResumeView'
 import { PLANNING_REF_WITH_ID } from '@/firebase-config'
 import { useEffect } from 'react'
 import { setStorage, storage } from '@/utils/planning-local-storage'
+import Content from '@/layouts/Content'
 
 export async function getServerSideProps(ctx: any) {
 	const { id } = ctx.query
@@ -58,7 +59,7 @@ function Room({ planning: initialPlanning }: Props) {
 	const currentParticipant = participants.find((participant) => participant.name === user.name)
 
 	return (
-		<Page>
+		<Page className='h-full'>
 			{currentParticipant?.vote ? (
 				<ResumeView participants={planning.participants} average={planning.average} />
 			) : (
@@ -67,6 +68,8 @@ function Room({ planning: initialPlanning }: Props) {
 					currentCard={currentParticipant?.vote}
 					revealed={Boolean(planning.average)}
 					planningName={planning.name}
+					average={planning.average}
+					hostId={planning.hostId}
 				/>
 			)}
 		</Page>
