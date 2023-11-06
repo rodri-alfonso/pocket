@@ -9,7 +9,7 @@ interface Props {
 export default function Alert({ label, isOpen, onClose }: Props) {
 	useEffect(() => {
 		if (isOpen) {
-			const interval = setTimeout(() => onClose(), 1000)
+			const interval = setTimeout(() => onClose(), 1500)
 			return () => clearInterval(interval)
 		}
 	}, [])

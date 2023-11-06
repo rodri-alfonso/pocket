@@ -68,6 +68,8 @@ function Room({ planning: initialPlanning }: Props) {
 					currentCard={currentParticipant?.vote}
 					revealed={Boolean(planning.average)}
 					planningName={planning.name}
+					average={planning.average}
+					hostId={planning.hostId}
 				/>
 			)}
 		</Page>

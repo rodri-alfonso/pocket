@@ -5,10 +5,10 @@ interface Props {
 }
 
 export default function Avatar({ type }: Props) {
-	const IconComponent = lazy(() => import(`./${type}`))
+	const IconComponent = lazy(() => import(`./${type}.svg`))
 
 	return (
-		<Suspense>
+		<Suspense fallback={<span>loading...</span>}>
 			<IconComponent />
 		</Suspense>
 	)

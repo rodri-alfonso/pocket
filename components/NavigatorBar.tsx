@@ -33,7 +33,9 @@ export default function NavigatorBar() {
 			>
 				<ShareIcon className='w-4 -ml-0.5' />
 			</button>
-			{isAlertOpen && <Alert isOpen={isAlertOpen} onClose={() => setIsAlertOpen(false)} label='Copied to clipboard!' />}
+			{isAlertOpen && (
+				<Alert isOpen={isAlertOpen} onClose={() => setIsAlertOpen(false)} label='Copied link to clipboard!' />
+			)}
 		</div>
 	)
 }

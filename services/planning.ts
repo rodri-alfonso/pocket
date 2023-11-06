@@ -17,6 +17,10 @@ const planningService = {
 	setAverage: async (planningId: string, average: number) => updateDoc(docRef(planningId), { average }),
 	resetPlanning: async (planningId: string, newParticipants: Participant[]) =>
 		updateDoc(docRef(planningId), { average: 0, participants: newParticipants }),
+	deleteParticipant: async (planningId: string, userId: string, participants: Participant[]) => {
+		const newParticipants = participants.filter((participant: Participant) => participant.id !== userId)
+		await planningService.resetPlanning(planningId, newParticipants)
+	},
 }
 
 export default planningService

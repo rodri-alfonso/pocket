@@ -29,6 +29,13 @@ function Home({ plannings }: Props) {
 	const [isOpen, setIsOpen] = useState(false)
 	const createdPlannings = plannings.filter((planning) => planning.hostId === user.id)
 
+	if (isOpen)
+		return (
+			<Page className='flex flex-col justify-between'>
+				<PlanningForm onClose={() => setIsOpen(false)} />
+			</Page>
+		)
+
 	return (
 		<Page className='flex flex-col justify-between'>
 			<Content>
@@ -36,27 +43,23 @@ function Home({ plannings }: Props) {
 					<PlanningForm onClose={() => setIsOpen(false)} />
 				) : (
 					<div className='grid py-12 gap-8 w-full h-full relative'>
-						{!createdPlannings.length ? (
-							<EmptyStatePlannings />
-						) : (
-							<section className='flex flex-col gap-6'>
-								<div className='flex justify-between items-center'>
-									<h3 className='text-xl font-bold pl-1'>My plannings</h3>
-									<button
-										onClick={() => setIsOpen(true)}
-										className='w-9 h-9 rounded-md bg-gray-800 active:scale-95 transition-all text-white font-bold grid place-items-center shadow-md'
-									>
-										<PlusIcon className='w-3.5 h-3.5' />
-									</button>
-								</div>
+						<section className='flex flex-col gap-6'>
+							<div className='flex justify-between items-center'>
+								<h3 className='text-xl font-bold pl-1'>My plannings</h3>
+								<button
+									onClick={() => setIsOpen(true)}
+									className='w-9 h-9 rounded-md bg-gray-800 active:scale-95 transition-all text-white font-bold grid place-items-center shadow-md'
+								>
+									<PlusIcon className='w-3.5 h-3.5' />
+								</button>
+							</div>
 
-								<div className='grid place-items-center gap-3 w-full rounded-xl '>
-									{createdPlannings.map((planning) => (
-										<PlanningCard key={planning.hostId} {...planning} />
-									))}
-								</div>
-							</section>
-						)}
+							<div className='grid place-items-center gap-3 w-full rounded-xl '>
+								{createdPlannings.map((planning) => (
+									<PlanningCard key={planning.hostId} {...planning} />
+								))}
+							</div>
+						</section>
 					</div>
 				)}
 			</Content>

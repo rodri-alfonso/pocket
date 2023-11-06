@@ -20,7 +20,6 @@ export default function ResumeView({ participants, average }: Props) {
 
 	function handleReveal() {
 		const filteredParticipants = participants.filter((participant) => typeof participant.vote !== 'string')
-		console.log('🚀 ~ file: ResumeView.tsx:23 ~ filteredParticipants:', filteredParticipants)
 		const average = filteredParticipants.reduce((acc, participant) => acc + participant.vote, 0) / participants.length
 
 		setAverage(plnningId, average)
@@ -34,7 +33,7 @@ export default function ResumeView({ participants, average }: Props) {
 	}
 
 	return (
-		<Content className='flex flex-col justify-between relative' spreadLayout>
+		<Content className='flex flex-col justify-between relative'>
 			<div className='h-full  flex flex-col justify-between'>
 				<Participants participants={participants} average={average} />
 				<Results average={average} hasAverage={hasAverage} participants={participants} />
