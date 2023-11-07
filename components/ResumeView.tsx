@@ -9,11 +9,12 @@ import planningService from '@/services/planning'
 interface Props {
 	participants: Participant[]
 	average: number
+	isHost: boolean
 }
 
 const { setAverage, resetPlanning } = planningService
 
-export default function ResumeView({ participants, average }: Props) {
+export default function ResumeView({ participants, average, isHost }: Props) {
 	const router = useRouter()
 	const plnningId = router.query.id as string
 	const hasAverage = Boolean(average)
@@ -33,7 +34,7 @@ export default function ResumeView({ participants, average }: Props) {
 	}
 
 	return (
-		<Content className='flex h-full flex-col justify-between relative'>
+		<Content className='flex h-full flex-col justify-between relative' isHost={isHost}>
 			<div className='h-full pt-4 flex flex-col justify-between'>
 				<Participants participants={participants} average={average} />
 				<Results average={average} hasAverage={hasAverage} participants={participants} />

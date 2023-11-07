@@ -14,9 +14,10 @@ import OptionsModal from '@/components/OptionsModal'
 interface Props {
 	children: any
 	className?: string
+	isHost?: boolean
 }
 
-export default function Content({ children, className = '' }: Props) {
+export default function Content({ children, className = '', isHost }: Props) {
 	const router = useRouter()
 	const { user } = useRegistration()
 	const [isAlertOpen, setIsAlertOpen] = useState(false)
@@ -67,12 +68,14 @@ export default function Content({ children, className = '' }: Props) {
 						onClickSecondary={() => setIsDeleteOpen(false)}
 						title='Do you want to delete this campaing?'
 					>
-						<button
-							onClick={() => setIsDeleteOpen(true)}
-							className='w-9 h-9 border border-solid border-gray-200  rounded-md  grid place-items-center active:scale-95 transition-all hover:bg-gray-800 text-gray-800 hover:text-white '
-						>
-							<DeleteIcon className='w-4 -ml-0.5' />
-						</button>
+						{isHost && (
+							<button
+								onClick={() => setIsDeleteOpen(true)}
+								className='w-9 h-9 border border-solid border-gray-200  rounded-md  grid place-items-center active:scale-95 transition-all hover:bg-gray-800 text-gray-800 hover:text-white '
+							>
+								<DeleteIcon className='w-4 -ml-0.5' />
+							</button>
+						)}
 					</OptionsModal>
 					<button
 						onClick={handleShare}

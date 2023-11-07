@@ -61,7 +61,11 @@ function Room({ planning: initialPlanning }: Props) {
 	return (
 		<Page className='h-full'>
 			{currentParticipant?.vote ? (
-				<ResumeView participants={planning.participants} average={planning.average} />
+				<ResumeView
+					participants={planning.participants}
+					average={planning.average}
+					isHost={planning.hostId === user.id}
+				/>
 			) : (
 				<CardSelector
 					participants={participants}
