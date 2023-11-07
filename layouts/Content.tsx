@@ -98,7 +98,7 @@ export default function Content({ children, className = '', isHost }: Props) {
 	}
 
 	return (
-		<div className='h-full flex flex-col gap-3'>
+		<div className='h-screen flex flex-col gap-3'>
 			<div className='grid gap-8'>{router.asPath !== '/' ? <SecondHeader /> : <Header />}</div>
 			<div className={className}>{children}</div>
 		</div>

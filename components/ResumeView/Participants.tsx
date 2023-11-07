@@ -3,7 +3,6 @@ import { Participant } from '@/types/planning'
 import { useRegistration } from '@/context/planning'
 import CheckIcon from '@/assets/icons/Check'
 import { useState } from 'react'
-import Modal from '@/theme/modal'
 import planningService from '@/services/planning'
 import { useRouter } from 'next/router'
 import OptionsModal from '../OptionsModal'
@@ -56,9 +55,9 @@ export default function Participants({ participants, average, hostId }: Props) {
 					</span>
 				</button>
 			))}
-			{Boolean(selectedParticipant) && (
+			{Boolean(selectedParticipant.id) && (
 				<OptionsModal
-					isOpen={Boolean(selectedParticipant)}
+					isOpen={Boolean(selectedParticipant.id)}
 					onClose={() => setSelectedParticipant(initialParticipant)}
 					labelPrimary='Expel'
 					labelSecondary='Cancel'
