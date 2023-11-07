@@ -3,6 +3,7 @@ import Modal from '@/theme/modal'
 import { useState } from 'react'
 import { useRegistration } from '@/context/planning'
 import CloseIcon from '@/assets/icons/Close'
+import { useRouter } from 'next/router'
 
 export default function LogoutModal() {
 	const [isOpen, setIsOpen] = useState(false)

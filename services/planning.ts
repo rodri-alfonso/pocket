@@ -1,6 +1,6 @@
 import { db } from '@/firebase-config'
 import { Participant, Planning } from '@/types/planning'
-import { addDoc, arrayUnion, collection, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
+import { addDoc, arrayUnion, collection, doc, getDoc, setDoc, updateDoc, deleteDoc } from 'firebase/firestore'
 
 const docRef = (docId: string) => doc(db, 'plannings', docId)
 
@@ -20,6 +20,9 @@ const planningService = {
 	deleteParticipant: async (planningId: string, userId: string, participants: Participant[]) => {
 		const newParticipants = participants.filter((participant: Participant) => participant.id !== userId)
 		await planningService.resetPlanning(planningId, newParticipants)
+	},
+	deletePlanning: async (planningId: string) => {
+		await deleteDoc(docRef(planningId))
 	},
 }
 
