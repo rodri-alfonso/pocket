@@ -1,8 +1,9 @@
 import { Planning } from '@/types/planning'
 import { useEffect, useState } from 'react'
-import Register from '../components/Register'
+
 import { ENVIRONMENTS } from './constants'
 import { useRegistration } from '@/context/planning'
+import Register from '@/components/Register'
 
 interface AuthProps {
 	planning: Planning
