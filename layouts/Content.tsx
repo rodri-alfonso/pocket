@@ -50,7 +50,7 @@ export default function Content({ children, className = '' }: Props) {
 
 	const SecondHeader = () => {
 		return (
-			<header className='flex items-center justify-between gap-3'>
+			<header className='flex items-center justify-between gap-3 '>
 				<Link
 					href='/'
 					className='w-9 h-9 border border-solid border-gray-200 rounded-md  grid place-items-center active:scale-95 transition-all hover:bg-gray-800 text-gray-800 hover:text-white '
@@ -83,7 +83,12 @@ export default function Content({ children, className = '' }: Props) {
 					<LogoutModal />
 				</div>
 				{isAlertOpen && (
-					<Alert isOpen={isAlertOpen} onClose={() => setIsAlertOpen(false)} label='Copied link to clipboard!' />
+					<Alert
+						isOpen={isAlertOpen}
+						onClose={() => setIsAlertOpen(false)}
+						label='Copied link to clipboard!'
+						className='top-16 -right-32'
+					/>
 				)}
 			</header>
 		)

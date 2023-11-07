@@ -44,7 +44,7 @@ export default function EmptyStateGuests() {
 
 	return (
 		<Page className='p-10'>
-			<Content>
+			<Content className='pt-8'>
 				<picture className='grid gap-2 place-items-center pb-4'>
 					<F1 />
 					<h3 className='font-semibold h-5 capitalize text-sm'>{user.name}</h3>
@@ -58,7 +58,12 @@ export default function EmptyStateGuests() {
 						<Button text='Copy on clipboard' onClick={handleCopyLink} />
 					</div>
 					{isAlertOpen && (
-						<Alert isOpen={isAlertOpen} onClose={() => setIsAlertOpen(false)} label='Copied to clipboard!' />
+						<Alert
+							isOpen={isAlertOpen}
+							onClose={() => setIsAlertOpen(false)}
+							label='Copied to clipboard!'
+							className='top-0 -bottom-36'
+						/>
 					)}
 				</div>
 			</Content>
