@@ -1,8 +1,6 @@
-interface Props {
-	className?: string
-}
+import { IconProps } from '../types'
 
-export default function ChevronIcon({ className }: Props) {
+export default function ChevronIcon({ className }: IconProps) {
 	return (
 		<svg width='7' height='12' viewBox='0 0 7 12' fill='none' className={className}>
 			<path

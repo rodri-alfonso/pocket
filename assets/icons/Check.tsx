@@ -1,8 +1,6 @@
-interface Props {
-	className?: string
-}
+import { IconProps } from '../types'
 
-export default function CheckIcon({ className }: Props) {
+export default function CheckIcon({ className }: IconProps) {
 	return (
 		<svg width='19' height='19' viewBox='0 0 19 19' fill='none' className={className}>
 			<path

@@ -1,8 +1,6 @@
-interface Props {
-	className?: string
-}
+import { IconProps } from '../types'
 
-export default function MenuIcon({ className }: Props) {
+export default function MenuIcon({ className }: IconProps) {
 	return (
 		<svg width='16' height='16' viewBox='0 0 16 16' fill='none' className={className}>
 			<path

@@ -1,8 +1,6 @@
-interface Props {
-	className?: string
-}
+import { IconProps } from '../types'
 
-export default function PlusIcon({ className }: Props) {
+export default function PlusIcon({ className }: IconProps) {
 	return (
 		<svg width='14' height='14' viewBox='0 0 14 14' fill='none' className={className}>
 			<path

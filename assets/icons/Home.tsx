@@ -1,8 +1,6 @@
-interface Props {
-	className?: string
-}
+import { IconProps } from '../types'
 
-export default function HomeIcon({ className }: Props) {
+export default function HomeIcon({ className }: IconProps) {
 	return (
 		<svg width='16' height='18' viewBox='0 0 16 18' fill='none' className={className}>
 			<path

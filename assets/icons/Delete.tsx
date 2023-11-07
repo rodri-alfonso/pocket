@@ -1,8 +1,6 @@
-interface Props {
-	className?: string
-}
+import { IconProps } from '../types'
 
-export default function DeleteIcon({ className }: Props) {
+export default function DeleteIcon({ className }: IconProps) {
 	return (
 		<svg width='14' height='18' viewBox='0 0 14 18' fill='none' className={className}>
 			<path

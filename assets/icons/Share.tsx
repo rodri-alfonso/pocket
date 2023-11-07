@@ -1,4 +1,6 @@
-export default function ShareIcon({ className }) {
+import { IconProps } from '../types'
+
+export default function ShareIcon({ className }: IconProps) {
 	return (
 		<svg width='17' height='19' viewBox='0 0 17 19' fill='none' className={className}>
 			<path
