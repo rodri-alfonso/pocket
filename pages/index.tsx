@@ -38,7 +38,7 @@ function Home({ plannings }: Props) {
 
 	return (
 		<Page className='flex flex-col justify-between'>
-			<Content className=''>
+			<Content>
 				{isOpen ? (
 					<PlanningForm onClose={() => setIsOpen(false)} />
 				) : (
