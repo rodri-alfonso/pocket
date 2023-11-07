@@ -14,15 +14,21 @@ interface Props {
 	hostId?: string
 }
 
+const initialParticipant = {
+	id: '',
+	name: '',
+	vote: 0,
+}
+
 export default function Participants({ participants, average, hostId }: Props) {
 	const router = useRouter()
 	const { user } = useRegistration()
-	const [selectedParticipant, setSelectedParticipant] = useState(null)
+	const [selectedParticipant, setSelectedParticipant] = useState(initialParticipant)
 
 	const isHost = user.id === hostId
 
 	function handleDelete() {
-		setSelectedParticipant(null)
+		setSelectedParticipant(initialParticipant)
 		planningService.deleteParticipant(router.query.id as string, selectedParticipant.id, participants)
 	}
 
@@ -53,11 +59,11 @@ export default function Participants({ participants, average, hostId }: Props) {
 			{Boolean(selectedParticipant) && (
 				<OptionsModal
 					isOpen={Boolean(selectedParticipant)}
-					onClose={() => setSelectedParticipant(null)}
+					onClose={() => setSelectedParticipant(initialParticipant)}
 					labelPrimary='Expel'
 					labelSecondary='Cancel'
 					onClickPrimary={handleDelete}
-					onClickSecondary={() => setSelectedParticipant(null)}
+					onClickSecondary={() => setSelectedParticipant(initialParticipant)}
 					title={`Do you want to expel ${selectedParticipant?.name}?`}
 				/>
 			)}

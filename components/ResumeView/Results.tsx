@@ -2,7 +2,7 @@ import { Participant } from '@/types/planning'
 import { getParticipantsVoteCount } from '@/utils'
 
 interface Card {
-	vote: number
+	vote: number | string
 	isRevealed: boolean
 	count: number
 }
