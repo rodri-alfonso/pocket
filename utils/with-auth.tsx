@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 import { ENVIRONMENTS } from './constants'
 import { useRegistration } from '@/context/planning'
-import Register from '@/components/Register'
+import Register from '../components/Register'
 
 interface AuthProps {
 	planning: Planning

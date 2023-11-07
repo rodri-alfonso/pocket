@@ -5,7 +5,6 @@ import uniqid from 'uniqid'
 import { useRegistration } from '@/context/planning'
 import Button from '@/theme/button'
 import Avatar from '@/theme/avatar'
-import F1 from '@/avatars/F1'
 
 export default function Register() {
 	const [username, setUsername] = useState('')
@@ -32,37 +31,6 @@ export default function Register() {
 							/>
 						</div>
 					</div>
-					{/* <h3 className='text-center'>Choose an avatar</h3>
-					<div className='flex flex-wrap gap-3 justify-center items-center text-gray-700 p-4'>
-						<button type='button' className='hover:text-gray-900'>
-							<F1 />
-						</button>
-						<button type='button' className='hover:text-gray-900'>
-							<F1 />
-						</button>
-						<button type='button' className='hover:text-gray-900'>
-							<F1 />
-						</button>
-						<button type='button' className='hover:text-gray-900'>
-							<F1 />
-						</button>
-						<button type='button' className='hover:text-gray-900'>
-							<F1 />
-						</button>
-						<button type='button' className='hover:text-gray-900'>
-							<F1 />
-						</button>
-						<button type='button' className='hover:text-gray-900'>
-							<F1 />
-						</button>
-						<button type='button' className='hover:text-gray-900'>
-							<F1 />
-						</button>
-						<button type='button' className='hover:text-gray-900'>
-							<F1 />
-						</button>
-					</div> */}
-
 					<Button text='Continue' disabled={!username} onClick={() => {}} className='w-full' />
 				</form>
 			</div>
