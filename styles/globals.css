@@ -7,3 +7,7 @@
 		-webkit-tap-highlight-color: transparent;
 	}
 }
+
+:root {
+	--doc-height: 100%;
+}
