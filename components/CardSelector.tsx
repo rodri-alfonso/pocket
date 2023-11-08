@@ -24,8 +24,8 @@ export default function CardSelector({ participants, revealed, average, planning
 	const supportText = selectedCard ? 'You have picked a card to vote' : 'Pick a card to vote!'
 
 	return (
-		<Content className='h-full' isHost={hostId === user.id}>
-			<div className='grid h-full gap-6 content-between pt-4 w-full'>
+		<Content isHost={hostId === user.id}>
+			<div className='h-full flex flex-col gap-10  pt-4 w-full'>
 				<Participants participants={participants} average={average} hostId={hostId} />
 				<div className='grid gap-6 justify-center'>
 					<h2

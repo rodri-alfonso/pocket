@@ -59,7 +59,7 @@ function Room({ planning: initialPlanning }: Props) {
 	const currentParticipant = participants.find((participant) => participant.name === user.name)
 
 	return (
-		<Page className='h-full'>
+		<Page>
 			{currentParticipant?.vote ? (
 				<ResumeView
 					participants={planning.participants}
