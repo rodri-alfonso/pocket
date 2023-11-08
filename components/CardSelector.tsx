@@ -25,7 +25,7 @@ export default function CardSelector({ participants, revealed, average, planning
 
 	return (
 		<Content isHost={hostId === user.id}>
-			<div className='h-full flex flex-col gap-10  pt-4 w-full'>
+			<div className='h-full flex flex-col gap-3 justify-between items-center  pt-4 w-full'>
 				<Participants participants={participants} average={average} hostId={hostId} />
 				<div className='grid gap-6 justify-center'>
 					<h2
@@ -51,7 +51,7 @@ export default function CardSelector({ participants, revealed, average, planning
 				</div>
 
 				<button
-					className='bg-gray-800 mt-auto text-white font-medium rounded-lg px-4 py-2 w-full mx-auto max-w-xs disabled:opacity-25 active:scale-95 transition-all'
+					className='bg-gray-800 text-white font-medium rounded-lg px-4 py-2 w-full mx-auto max-w-xs disabled:opacity-25 active:scale-95 transition-all'
 					disabled={!selectedCard}
 					onClick={handleSelectCard}
 				>
