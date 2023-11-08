@@ -7,7 +7,6 @@ import { db } from '@/firebase-config'
 import { Planning } from '@/types/planning'
 import PlanningCard from '@/components/PlanningCard'
 import PlusIcon from '@/assets/icons/Plus'
-import EmptyStatePlannings from '@/components/empty-state-plannings'
 import PlanningForm from '@/components/PlanningForm'
 import { useState } from 'react'
 
