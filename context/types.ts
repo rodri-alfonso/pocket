@@ -1,9 +1,9 @@
-import { Avatar } from '@/types/planning'
+import { AvatarType } from '@/assets/avatars'
 
 export type User = {
 	name: string
 	id: string
-	avatar: Avatar
+	avatar: AvatarType
 }
 
 export interface State {
