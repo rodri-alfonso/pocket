@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { ENVIRONMENTS } from './constants'
 import { useRegistration } from '@/context/planning'
 import Register from '../components/Register'
+import Spinner from '@/components/Spinner'
 
 interface AuthProps {
 	planning: Planning
@@ -25,7 +26,7 @@ export default function withAuth(Component: any) {
 			setIsLoading(false)
 		}, [])
 
-		if (isLoading) return <span>Loading...</span>
+		if (isLoading) return <Spinner />
 		if (!user.name) return <Register />
 		return <Component {...props} />
 	}
