@@ -25,7 +25,7 @@ export default function CardSelector({ participants, revealed, average, planning
 
 	return (
 		<Content isHost={hostId === user.id}>
-			<div className='h-full flex flex-col gap-3 justify-between items-center  pt-4 w-full'>
+			<div className='h-full flex flex-col gap-4 justify-between items-center pt-4 w-full'>
 				<Participants participants={participants} average={average} hostId={hostId} />
 				<div className='grid gap-6 justify-center'>
 					<h2
@@ -38,7 +38,7 @@ export default function CardSelector({ participants, revealed, average, planning
 					<section className='grid grid-cols-3 gap-4 w-full place-items-center max-w-xs h-full sm:grid-cols-4'>
 						{cards.map((card: any, idx) => (
 							<button
-								className={`border-solid border text-xl grid place-items-center rounded-lg py-7 w-16 font-semibold transition-all active:scale-95 hover:border-gray-500 ${
+								className={`border-solid border text-xl grid place-items-center rounded-lg w-16 font-semibold h-16 transition-all active:scale-95 hover:border-gray-500 ${
 									selectedCard === card ? 'bg-gray-800 text-white' : 'bg-gray-50 border-gray-200 '
 								}`}
 								onClick={() => setSelectedCard(card)}
