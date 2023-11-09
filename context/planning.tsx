@@ -15,7 +15,7 @@ const initialState: State = {
 	user: {
 		name: '',
 		id: '',
-		avatar: 'F1',
+		avatar: 'F2',
 	},
 	isRegistered: false,
 	concurrentPlannings: [],

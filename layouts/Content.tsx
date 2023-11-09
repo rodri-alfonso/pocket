@@ -1,4 +1,3 @@
-import F1 from '@/avatars/F1'
 import { useRegistration } from '@/context/planning'
 import { useRouter } from 'next/router'
 import LogoutModal from '@/components/LogoutModal'
@@ -10,6 +9,7 @@ import ShareIcon from '@/assets/icons/Share'
 import DeleteIcon from '@/assets/icons/Delete'
 import planningService from '@/services/planning'
 import OptionsModal from '@/components/OptionsModal'
+import Avatar from '@/assets/avatars'
 
 interface Props {
 	children: any
@@ -39,7 +39,7 @@ export default function Content({ children, className = '', isHost }: Props) {
 		return (
 			<header className='flex items-center justify-between gap-3'>
 				<div className='flex items-center gap-3'>
-					<F1 className='w-9 h-9' />
+					<Avatar type={user.avatar} className='w-9 h-9' />
 					<h2 className='flex items-center gap-2 font-bold text-gray-700 capitalize'>
 						Hi, {user.name} <span>👋</span>
 					</h2>

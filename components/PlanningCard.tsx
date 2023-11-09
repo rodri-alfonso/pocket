@@ -1,6 +1,6 @@
 import { Planning } from '@/types/planning'
 import Link from 'next/link'
-import F1 from '@/avatars/F1'
+import Avatar from '@/assets/avatars'
 
 interface Props extends Planning {
 	id: string
@@ -20,7 +20,11 @@ export default function PlanningCard({ id, name, participants, votingSystem }: P
 				<div className='flex items-center gap-2'>
 					<div className='flex items-center '>
 						{participants.map((participant, index) => (
-							<F1 key={`${index}_${participant}`} className='w-8 h-8 text-black  rounded-full -ml-1.5 bg-gray-100' />
+							<Avatar
+								type={participant.avatar}
+								key={`${index}_${participant}`}
+								className='w-8 h-8 text-black  rounded-full -ml-1.5 bg-gray-100'
+							/>
 						))}
 					</div>
 				</div>

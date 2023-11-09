@@ -9,7 +9,7 @@ import { Participant } from '@/types/planning'
 import planningService from '@/services/planning'
 import Alert from '@/theme/alert'
 import { setStorage, storage } from '@/utils/planning-local-storage'
-import F1 from '@/avatars/F1'
+import Avatar from '@/assets/avatars'
 
 export default function EmptyStateGuests() {
 	const router = useRouter()
@@ -29,7 +29,7 @@ export default function EmptyStateGuests() {
 				.participants.some((participant: Participant) => participant.id === user.id)
 
 			if (user.name && !isUserInParticipants) {
-				addParticipant(planningId, { name: user.name, vote: 0, id: user.id, avatar: 'F1' })
+				addParticipant(planningId, { name: user.name, vote: 0, id: user.id, avatar: 'F2' })
 
 				setStorage({ ...user, concurrentPlannings: [planningId] })
 			}
@@ -46,7 +46,7 @@ export default function EmptyStateGuests() {
 		<Page className='p-10'>
 			<Content className='pt-8'>
 				<picture className='grid gap-2 place-items-center pb-4'>
-					<F1 />
+					<Avatar type={user.avatar} />
 					<h3 className='font-semibold h-5 capitalize text-sm'>{user.name}</h3>
 				</picture>
 				<h2 className='font-medium mb-4 text-gray-700 py-0.5 bg-gray-100 rounded-full px-5 mx-auto text-center'>

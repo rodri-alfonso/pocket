@@ -46,7 +46,7 @@ function Room({ planning: initialPlanning }: Props) {
 		if (user.name && !isUserInParticipants) {
 			setDoc(
 				PLANNING_REF_WITH_ID(router.query.id as string),
-				{ participants: arrayUnion({ name: user.name, vote: 0, id: user.id, avatar: 'F1' }) },
+				{ participants: arrayUnion({ name: user.name, vote: 0, id: user.id, avatar: 'F2' }) },
 				{ merge: true }
 			)
 			setStorage({ ...user, concurrentPlannings: [storage.currentPlannings, planningId] })

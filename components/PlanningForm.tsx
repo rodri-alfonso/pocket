@@ -17,7 +17,7 @@ export default function PlanningForm({ onClose }: any) {
 
 		const payload: Planning = {
 			hostId: user.id,
-			participants: [{ name: user.name, vote: 0, avatar: 'F1', id: user.id }],
+			participants: [{ name: user.name, vote: 0, avatar: 'F2', id: user.id }],
 			host: user.name,
 			average: 0,
 			name: planningName,
@@ -30,7 +30,7 @@ export default function PlanningForm({ onClose }: any) {
 	return (
 		<form onSubmit={handleSubmit} className='flex flex-col justify-between h-full w-full max-w-xs mx-auto'>
 			<div className='flex flex-col gap-8 items-center'>
-				<Avatar type='F1' name={user.name} />
+				<Avatar type='F2' name={user.name} />
 				<h1 className='font-medium text-gray-600 text-lg'>Let's create a planning</h1>
 				<Input
 					label='Planning Name'
