@@ -17,7 +17,7 @@ export default function PlanningForm({ onClose }: any) {
 
 		const payload: Planning = {
 			hostId: user.id,
-			participants: [{ name: user.name, vote: 0, avatar: 'F2', id: user.id }],
+			participants: [{ ...user, vote: 0 }],
 			host: user.name,
 			average: 0,
 			name: planningName,

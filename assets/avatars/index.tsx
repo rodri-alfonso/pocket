@@ -7,7 +7,7 @@ interface AvatarProps {
 	className?: string
 }
 
-export default function Avatar({ type = 'F2', className = '' }: AvatarProps) {
+export default function Avatar({ type, className = '' }: AvatarProps) {
 	const [component, setComponent] = useState(<div className='bg-gray-100 h-[52px] w-[52px] rounded-xl' />)
 
 	useEffect(() => {
