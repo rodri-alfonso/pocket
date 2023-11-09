@@ -38,7 +38,7 @@ export default function CardSelector({ participants, revealed, average, planning
 					<section className='grid grid-cols-3 gap-4 w-full place-items-center max-w-xs h-full sm:grid-cols-4'>
 						{cards.map((card: any, idx) => (
 							<button
-								className={`border-solid border text-xl grid place-items-center rounded-lg w-16 font-semibold h-16 transition-all active:scale-95 hover:border-gray-500 ${
+								className={`border-solid border text-xl grid place-items-center rounded-lg w-20 font-semibold h-16 transition-all active:scale-95 hover:border-gray-500 ${
 									selectedCard === card ? 'bg-gray-800 text-white' : 'bg-gray-50 border-gray-200 '
 								}`}
 								onClick={() => setSelectedCard(card)}
