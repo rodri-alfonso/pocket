@@ -29,7 +29,7 @@ export default function EmptyStateGuests() {
 				.participants.some((participant: Participant) => participant.id === user.id)
 
 			if (user.name && !isUserInParticipants) {
-				addParticipant(planningId, { name: user.name, vote: 0, id: user.id, avatar: 'F2' })
+				addParticipant(planningId, { name: user.name, vote: 0, id: user.id, avatar: user.avatar })
 
 				setStorage({ ...user, concurrentPlannings: [planningId] })
 			}

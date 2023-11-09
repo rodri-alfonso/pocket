@@ -17,7 +17,7 @@ export default function withAuth(Component: any) {
 		useEffect(() => {
 			const storage = JSON.parse(
 				localStorage.getItem(ENVIRONMENTS.STORAGE_KEY) ||
-					'{"name": "", "id": "", "avatar": "F2", "concurrentPlannings": "[]"}'
+					'{"name": "", "id": "", "avatar": "M4", "concurrentPlannings": "[]"}'
 			)
 
 			if (storage.name) setRegistration(storage)

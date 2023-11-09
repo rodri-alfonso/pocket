@@ -43,7 +43,7 @@ export default function Participants({ participants, average, hostId }: Props) {
 					} ${isHost ? 'hover:opacity-100 hover:bg-gray-200' : ''}`}
 				>
 					<div className='relative'>
-						<Avatar type='F2' />
+						<Avatar type={participant.avatar} />
 						{Boolean(participant.vote) && (
 							<span className='bg-gray-900 w-6 h-6 grid place-items-center rounded-full absolute -top-1.5 -left-1.5 text-white font-bold text-xs'>
 								{Boolean(average) ? participant.vote : <CheckIcon className='w-2.5 h-2.5 text-white' />}
