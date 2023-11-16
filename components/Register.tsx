@@ -20,7 +20,6 @@ export default function Register({ onClose }: any) {
 	}
 
 	return (
-		// <Page className='grid place-items-center pb-10'>
 		<div className='h-full w-full flex flex-col rounded-2xl'>
 			<Avatar name={username} type={avatar} />
 			<form onSubmit={handleSubmit} className='flex flex-col gap-10 justify-between items-center h-full'>
@@ -59,6 +58,5 @@ export default function Register({ onClose }: any) {
 				</div>
 			</form>
 		</div>
-		// </Page>
 	)
 }

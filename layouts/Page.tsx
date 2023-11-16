@@ -19,12 +19,10 @@ export default function Page({ children, className = '' }: Props) {
 	if (isMobile) return <Layout className={className}>{children}</Layout>
 
 	return (
-		<main className={`h-[var(--doc-height)] flex bg-white w-full ${isOpen ? 'pr-6' : ''} overflow-hidden`}>
+		<main className={`h-[var(--doc-height)] flex ${isOpen ? 'pl-4' : 'pl-4'} gap-4`}>
 			<Banner onClick={() => setIsOpen(true)} disabled={isOpen || Boolean(user.name)} />
-			<div className='w-1/3  h-[var(--doc-height)]  p-4 pb-10 pl-0'>
-				<div className='h-[var(--doc-height)] w-full bg-gray-100 relative rounded-2xl overflow-hidden'>
-					<Layout className={className}>{children}</Layout>
-				</div>
+			<div className='h-[var(--doc-height)] w-2/5 relative'>
+				<Layout className={className}>{children}</Layout>
 			</div>
 		</main>
 	)

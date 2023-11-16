@@ -2,18 +2,24 @@ import { useState } from 'react'
 import Register from './Register'
 import { useIsMobile } from '@/hooks/useWindowSize'
 import Banner from './Banner'
+import Layout from '@/layouts/Layout'
 
 export default function Landing() {
 	const isMobile = useIsMobile()
 	const [isOpenModal, setIsOpenModal] = useState(false)
 
-	if (isMobile && isOpenModal) return <Register onClose={() => setIsOpenModal(false)} />
+	if (isMobile && isOpenModal)
+		return (
+			<Layout>
+				<Register onClose={() => setIsOpenModal(false)} />
+			</Layout>
+		)
 
 	return (
-		<div className={`flex bg-white ${isOpenModal ? 'pr-6' : ''}`}>
+		<div className={`flex bg-white ${isOpenModal ? '' : ''} gap-4 px-4`}>
 			<Banner onClick={() => setIsOpenModal(true)} disabled={isOpenModal} />
 			{isOpenModal && (
-				<div className='w-1/3 py-10 bg-white'>
+				<div className='w-2/5 p-6'>
 					<Register onClose={() => setIsOpenModal(false)} />
 				</div>
 			)}

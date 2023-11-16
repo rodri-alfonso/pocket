@@ -19,8 +19,8 @@ const IconLink = ({ href, children }: { href: string; children: React.ReactNode 
 
 export default function Banner({ disabled = false, onClick }: BannerProps) {
 	return (
-		<main className='w-full h-screen flex flex-col justify-between px-10 max-sm:px-4 pb-10 gap-4'>
-			<div className='w-full px-8 pt-10'>
+		<main className='w-full h-screen flex flex-col justify-between gap-4 py-4'>
+			<div className='w-full'>
 				<div className='flex justify-between items-center text-center flex-col gap-10 max-sm:gap-6 max-sm:pb-10'>
 					<Logo className='text-gray-800 w-32' />
 					<div className='grid gap-7 place-items-center'>
