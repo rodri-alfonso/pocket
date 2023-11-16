@@ -5,6 +5,7 @@ import {
 	setStorage,
 	setPlanningStorage,
 	concurrentPlanningStorage,
+	setPocketSesionStorage,
 } from '@/utils/planning-local-storage'
 
 const SET_REGISTRATION_IN = 'SET_REGISTRATION_IN'
@@ -53,6 +54,7 @@ const useRegistration = () => {
 
 	const deleteRegistration = () => {
 		dispatch({ type: SET_REGISTRATION_OUT })
+		setPocketSesionStorage(state.user)
 		removeStorage()
 	}
 

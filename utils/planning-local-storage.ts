@@ -8,3 +8,7 @@ export const setPlanningStorage = (value: any) =>
 	localStorage.setItem(ENVIRONMENTS.PLANNING_STORAGE_KEY, JSON.stringify(value))
 export const concurrentPlanningStorage = () =>
 	JSON.parse(localStorage.getItem(ENVIRONMENTS.PLANNING_STORAGE_KEY) ?? '[]')
+
+export const pocketSesionStorage = () =>
+	JSON.parse(localStorage.getItem('pocket-sesion') ?? '{"avatar": "M4", "name": "id": ""}')
+export const setPocketSesionStorage = (value: any) => localStorage.setItem('pocket-sesion', JSON.stringify(value))

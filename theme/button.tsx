@@ -4,13 +4,15 @@ interface Props {
 	disabled?: boolean
 	secondary?: boolean
 	className?: string
+	type?: 'button' | 'submit' | 'reset'
 }
 
-export default function Button({ onClick, text, disabled, secondary, className = '' }: Props) {
+export default function Button({ onClick, text, disabled, secondary, className = '', type = 'submit' }: Props) {
 	return (
 		<button
 			onClick={onClick}
 			disabled={disabled}
+			type={type}
 			className={`px-4 py-2 active:scale-95 rounded-lg transition-all font-semibold disabled:opacity-30
              ${
 								secondary

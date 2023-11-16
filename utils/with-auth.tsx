@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 
 import { ENVIRONMENTS } from './constants'
 import { useRegistration } from '@/context/planning'
-import Register from '../components/Register'
 import Spinner from '@/components/Spinner'
+import Landing from '@/components/Landing'
 
 interface AuthProps {
 	planning: Planning
@@ -27,7 +27,7 @@ export default function withAuth(Component: any) {
 		}, [])
 
 		if (isLoading) return <Spinner />
-		if (!user.name) return <Register />
+		if (!user.name) return <Landing />
 		return <Component {...props} />
 	}
 
