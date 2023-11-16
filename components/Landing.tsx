@@ -16,10 +16,10 @@ export default function Landing() {
 		)
 
 	return (
-		<div className={`flex bg-white ${isOpenModal ? '' : ''} gap-4 px-4`}>
+		<div className={`h-[var(--doc-height)] flex bg-white ${isOpenModal ? '' : ''} gap-4 px-4`}>
 			<Banner onClick={() => setIsOpenModal(true)} disabled={isOpenModal} />
 			{isOpenModal && (
-				<div className='w-2/5 p-6'>
+				<div className='w-2/5 p-4 h-full'>
 					<Register onClose={() => setIsOpenModal(false)} />
 				</div>
 			)}
