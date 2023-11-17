@@ -42,29 +42,25 @@ function Home({ plannings }: Props) {
 			title='Pocket | Home'
 		>
 			<Content>
-				{isOpen ? (
-					<PlanningForm onClose={() => setIsOpen(false)} />
-				) : (
-					<div className='grid py-12 gap-8 w-full h-full relative'>
-						<section className='flex flex-col gap-6'>
-							<div className='flex justify-between items-center'>
-								<h3 className='text-xl font-bold pl-1'>My plannings</h3>
-								<button
-									onClick={() => setIsOpen(true)}
-									className='w-9 h-9 rounded-md bg-gray-800 active:scale-95 transition-all text-white font-bold grid place-items-center shadow-md'
-								>
-									<PlusIcon className='w-3.5 h-3.5' />
-								</button>
-							</div>
+				<div className='grid py-12 gap-8 w-full h-full relative'>
+					<section className='flex flex-col gap-6'>
+						<div className='flex justify-between items-center'>
+							<h3 className='text-xl font-bold pl-1'>My plannings</h3>
+							<button
+								onClick={() => setIsOpen(true)}
+								className='w-9 h-9 rounded-md bg-gray-800 active:scale-95 transition-all text-white font-bold grid place-items-center shadow-md'
+							>
+								<PlusIcon className='w-3.5 h-3.5' />
+							</button>
+						</div>
 
-							<div className='grid place-items-center gap-3 w-full rounded-xl '>
-								{createdPlannings.map((planning) => (
-									<PlanningCard key={planning.hostId} {...planning} />
-								))}
-							</div>
-						</section>
-					</div>
-				)}
+						<div className='grid place-items-center gap-3 w-full rounded-xl '>
+							{createdPlannings.map((planning) => (
+								<PlanningCard key={planning.hostId} {...planning} />
+							))}
+						</div>
+					</section>
+				</div>
 			</Content>
 		</Page>
 	)
