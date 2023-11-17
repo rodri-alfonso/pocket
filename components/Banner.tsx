@@ -38,7 +38,7 @@ export default function Banner({ disabled = false, onClick }: BannerProps) {
 					<button
 						disabled={disabled}
 						onClick={onClick}
-						className='disabled:opacity-40 px-6 py-3 max-sm:text-base bg-gray-800 text-white rounded-lg text-lg w-auto font-semibold active:scale-95 transition-all'
+						className='disabled:scale-100 disabled:cursor-not-allowed disabled:opacity-40 px-6 py-3 max-sm:text-base bg-gray-800 text-white rounded-lg text-lg w-auto font-semibold active:scale-95 transition-all'
 					>
 						Get Started
 					</button>

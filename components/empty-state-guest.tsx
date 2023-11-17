@@ -43,7 +43,11 @@ export default function EmptyStateGuests() {
 	}
 
 	return (
-		<Page className='p-10'>
+		<Page
+			className='p-10'
+			title='Pocket | Empty Planning'
+			description='Welcome to Pocket, a web app for Agile teams to creating rooms, invite your colleagues and vote to estimate tasks in real time.'
+		>
 			<Content className='pt-8'>
 				<picture className='grid gap-2 place-items-center pb-4'>
 					<Avatar type={user.avatar} />

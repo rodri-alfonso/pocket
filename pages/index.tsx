@@ -36,7 +36,11 @@ function Home({ plannings }: Props) {
 		)
 
 	return (
-		<Page className='flex flex-col justify-between'>
+		<Page
+			className='flex flex-col justify-between'
+			description='Welcome to Pocket, a web app for Agile teams to creating rooms, invite your colleagues and vote to estimate tasks in real time.'
+			title='Pocket | Home'
+		>
 			<Content>
 				{isOpen ? (
 					<PlanningForm onClose={() => setIsOpen(false)} />

@@ -6,6 +6,7 @@ import { useRegistration } from '@/context/planning'
 import ButtonDouble from '@/theme/button-double'
 import planningService from '@/services/planning'
 import Avatar from '@/theme/avatar'
+import Button from '@/theme/button'
 
 export default function PlanningForm({ onClose }: any) {
 	const [planningName, setPlanningName] = useState('')
@@ -39,7 +40,11 @@ export default function PlanningForm({ onClose }: any) {
 					onChange={(e) => setPlanningName(e.target.value)}
 				/>
 			</div>
-			<ButtonDouble labelPrimary='Create' labelSecondary='Cancel' disabled={!planningName} onClickSecondary={onClose} />
+			{/* <ButtonDouble labelPrimary='Create' labelSecondary='Cancel' disabled={!planningName} onClickSecondary={onClose} /> */}
+			<div className='w-full grid gap-2'>
+				<Button text='Create' type='submit' disabled={!planningName} onClick={() => {}} className='w-full' />
+				<Button type='button' text='Cancel' onClick={onClose} className='w-full text-gray-800' />
+			</div>
 		</form>
 	)
 }

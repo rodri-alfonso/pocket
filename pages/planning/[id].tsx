@@ -53,13 +53,24 @@ function Room({ planning: initialPlanning }: Props) {
 		}
 	}, [])
 
-	if (!initialPlanning) return <Page>Room not found</Page>
+	if (!initialPlanning)
+		return (
+			<Page
+				title='Pocket | Planning'
+				description='Welcome to Pocket, a web app for Agile teams to creating rooms, invite your colleagues and vote to estimate tasks in real time.'
+			>
+				Room not found
+			</Page>
+		)
 	if (isEmptyParticipants) return <EmptyStateGuests />
 
 	const currentParticipant = participants.find((participant) => participant.name === user.name)
 
 	return (
-		<Page>
+		<Page
+			title='Pocket | Planning'
+			description='Welcome to Pocket, a web app for Agile teams to creating rooms, invite your colleagues and vote to estimate tasks in real time.'
+		>
 			{currentParticipant?.vote ? (
 				<ResumeView
 					participants={planning.participants}
