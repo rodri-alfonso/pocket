@@ -11,6 +11,7 @@ import ResumeView from '@/components/ResumeView'
 import { PLANNING_REF_WITH_ID } from '@/firebase-config'
 import { useEffect } from 'react'
 import { setStorage, storage } from '@/utils/planning-local-storage'
+import NotFound from '@/components/NotFound'
 
 export async function getServerSideProps(ctx: any) {
 	const { id } = ctx.query
@@ -33,6 +34,8 @@ function Room({ planning: initialPlanning }: Props) {
 	const router = useRouter()
 	const planningId = router.query.id as string
 
+	if (!initialPlanning) return <NotFound />
+
 	const { participants, planning } = usePlanningState({ initialPlanning, planningId })
 	const { user } = useRegistration()
 
@@ -52,17 +55,7 @@ function Room({ planning: initialPlanning }: Props) {
 		}
 	}, [])
 
-	if (!initialPlanning)
-		return (
-			<Page
-				title='Pocket | Planning'
-				description='Welcome to Pocket, a web app for Agile teams to creating rooms, invite your colleagues and vote to estimate tasks in real time.'
-			>
-				Room not found
-			</Page>
-		)
 	if (isEmptyParticipants) return <EmptyStateGuests />
-
 	const currentParticipant = participants.find((participant) => participant.name === user.name)
 
 	return (
