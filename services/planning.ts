@@ -1,29 +1,29 @@
-import { db } from '@/firebase-config'
 import { Participant, Planning } from '@/types/planning'
-import { addDoc, arrayUnion, collection, doc, getDoc, setDoc, updateDoc, deleteDoc } from 'firebase/firestore'
+import { addDoc, arrayUnion, getDoc, setDoc, updateDoc, deleteDoc } from 'firebase/firestore'
+import { PLANNING_REF_BY_ID, PLANNINGS_REF } from '@/firebase-config'
 
-const docRef = (docId: string) => doc(db, 'plannings', docId)
+export const createPlanning = async (payload: Planning) => await addDoc(PLANNINGS_REF, payload)
 
-const planningService = {
-	createDocument: async (payload: Planning) =>
-		addDoc(collection(db, 'plannings'), payload).catch((error) => {
-			console.log(error)
-		}),
+export const getPlanning = async (planningId: string): Promise<Planning | null> => {
+	const document = await getDoc(PLANNING_REF_BY_ID(planningId))
+	let planning = null
 
-	addParticipant: async (planningId: string, user: Participant) =>
-		setDoc(docRef(planningId), { participants: arrayUnion(user) }, { merge: true }),
-
-	getDocument: async (planningId: string) => getDoc(docRef(planningId)),
-	setAverage: async (planningId: string, average: number) => updateDoc(docRef(planningId), { average }),
-	resetPlanning: async (planningId: string, newParticipants: Participant[]) =>
-		updateDoc(docRef(planningId), { average: 0, participants: newParticipants }),
-	deleteParticipant: async (planningId: string, userId: string, participants: Participant[]) => {
-		const newParticipants = participants.filter((participant: Participant) => participant.id !== userId)
-		await planningService.resetPlanning(planningId, newParticipants)
-	},
-	deletePlanning: async (planningId: string) => {
-		await deleteDoc(docRef(planningId))
-	},
+	if (document.exists()) planning = document.data() as Planning
+	return planning
 }
 
-export default planningService
+export const deletePlanning = async (planningId: string) => await deleteDoc(PLANNING_REF_BY_ID(planningId))
+
+export const setPlanningAverage = async (planningId: string, average: number) =>
+	await updateDoc(PLANNING_REF_BY_ID(planningId), { average })
+
+export const resetPlanning = async (planningId: string, newParticipants: Participant[]) =>
+	await updateDoc(PLANNING_REF_BY_ID(planningId), { average: 0, participants: newParticipants })
+
+export const deletePlanningParticipant = async (planningId: string, userId: string, participants: Participant[]) => {
+	const newParticipants = participants.filter((participant: Participant) => participant.id !== userId)
+	await resetPlanning(planningId, newParticipants)
+}
+
+export const addPlanningParticipant = async (planningId: string, user: Participant) =>
+	await setDoc(PLANNING_REF_BY_ID(planningId), { participants: arrayUnion(user) }, { merge: true })

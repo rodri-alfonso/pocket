@@ -1,5 +1,5 @@
 import { getApp, getApps, initializeApp } from 'firebase/app'
-import { doc, getFirestore } from 'firebase/firestore'
+import { collection, doc, getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
 	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -12,5 +12,9 @@ const firebaseConfig = {
 
 const app = !getApps.length ? initializeApp(firebaseConfig) : getApp()
 
+export const COLLECTION_ID = 'plannings'
+
 export const db = getFirestore(app)
-export const PLANNING_REF_WITH_ID = (docId: string) => doc(db, 'plannings', docId)
+
+export const PLANNING_REF_BY_ID = (docId: string) => doc(db, COLLECTION_ID, docId)
+export const PLANNINGS_REF = collection(db, COLLECTION_ID)

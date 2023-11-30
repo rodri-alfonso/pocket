@@ -1,13 +1,12 @@
 import MenuIcon from '@/assets/icons/Menu'
 import Modal from '@/theme/modal'
 import { useState } from 'react'
-import { useRegistration } from '@/context/planning'
+import { useAuth } from '@/context/auth'
 import CloseIcon from '@/assets/icons/Close'
-import { useRouter } from 'next/router'
 
 export default function LogoutModal() {
 	const [isOpen, setIsOpen] = useState(false)
-	const { deleteRegistration } = useRegistration()
+	const { logout } = useAuth()
 
 	return (
 		<>
@@ -30,7 +29,7 @@ export default function LogoutModal() {
 						<div className='w-full px-8 font-semibold'>
 							<button
 								className='mb-3 bg-gray-800 text-white px-9 w-full py-2 rounded-xl active:scale-95 transition-all'
-								onClick={deleteRegistration}
+								onClick={logout}
 							>
 								Logout
 							</button>

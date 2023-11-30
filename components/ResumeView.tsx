@@ -4,15 +4,13 @@ import { useRouter } from 'next/router'
 import Content from '@/layouts/Content'
 import Results from './ResumeView/Results'
 import Participants from './ResumeView/Participants'
-import planningService from '@/services/planning'
+import { setPlanningAverage, resetPlanning } from '@/services/planning'
 
 interface Props {
 	participants: Participant[]
 	average: number
 	isHost: boolean
 }
-
-const { setAverage, resetPlanning } = planningService
 
 export default function ResumeView({ participants, average, isHost }: Props) {
 	const router = useRouter()
@@ -23,7 +21,7 @@ export default function ResumeView({ participants, average, isHost }: Props) {
 		const filteredParticipants = participants.filter((participant) => typeof participant.vote !== 'string')
 		const average = filteredParticipants.reduce((acc, participant) => acc + participant.vote, 0) / participants.length
 
-		setAverage(plnningId, average)
+		setPlanningAverage(plnningId, average)
 	}
 
 	function handleEnd() {

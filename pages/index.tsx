@@ -1,22 +1,20 @@
 import Page from '@/layouts/Page'
 import Content from '@/layouts/Content'
-import withAuth from '@/utils/with-auth'
-import { useRegistration } from '@/context/planning'
-import { getDocs, collection } from 'firebase/firestore'
-import { db } from '@/firebase-config'
+import withAuth from '@/utils/withAuth'
+import { useAuth } from '@/context/auth'
 import { Planning } from '@/types/planning'
 import PlanningCard from '@/components/PlanningCard'
 import PlusIcon from '@/assets/icons/Plus'
 import PlanningForm from '@/components/PlanningForm'
 import { useState } from 'react'
+import { getAllPlannings } from '@/services/plannings'
 
 interface Props {
 	plannings: Array<Planning & { id: string }>
 }
 
 export async function getServerSideProps() {
-	const querySnapshot = await getDocs(collection(db, 'plannings'))
-	const plannings = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+	const plannings = await getAllPlannings()
 
 	return {
 		props: { plannings },
@@ -24,7 +22,7 @@ export async function getServerSideProps() {
 }
 
 function Home({ plannings }: Props) {
-	const { user } = useRegistration()
+	const { user } = useAuth()
 	const [isOpen, setIsOpen] = useState(false)
 	const createdPlannings = plannings.filter((planning) => planning.hostId === user.id)
 
@@ -36,11 +34,7 @@ function Home({ plannings }: Props) {
 		)
 
 	return (
-		<Page
-			className='flex flex-col justify-between'
-			description='Welcome to Pocket, a web app for Agile teams to creating rooms, invite your colleagues and vote to estimate tasks in real time.'
-			title='Pocket | Home'
-		>
+		<Page className='flex flex-col justify-between'>
 			<Content>
 				<div className='grid py-12 gap-8 w-full h-full relative'>
 					<section className='flex flex-col gap-6'>

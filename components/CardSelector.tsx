@@ -1,22 +1,32 @@
-import { useCards } from '@/hooks/cards'
+import { VOTING_SYSTEM_MAP } from '@/utils/config'
 import { useState } from 'react'
 import { updateDoc } from 'firebase/firestore'
 import { useRouter } from 'next/router'
-import { useRegistration } from '@/context/planning'
-import { PLANNING_REF_WITH_ID } from '@/firebase-config'
+import { useAuth } from '@/context/auth'
+import { PLANNING_REF_BY_ID } from '@/firebase-config'
 import Content from '@/layouts/Content'
 import Participants from './ResumeView/Participants'
+import { VotingSystem } from '@/types/planning'
 
-export default function CardSelector({ participants, revealed, average, planningName, hostId }: any) {
-	const cards = useCards()
-	const [selectedCard, setSelectedCard] = useState(0)
+interface CardSelectorProps {
+	participants: any
+	votingSystem: VotingSystem
+	revealed: boolean
+	average: number
+	hostId: string
+}
+
+export default function CardSelector({ participants, votingSystem, revealed, average, hostId }: CardSelectorProps) {
+	const [selectedCard, setSelectedCard] = useState<string | number>(0)
 	const router = useRouter()
-	const { user } = useRegistration()
+	const { user } = useAuth()
+
+	const cards = VOTING_SYSTEM_MAP[votingSystem]
 
 	function handleSelectCard() {
 		if (revealed) return
 		const updatedParticipants = participants.filter((participant: any) => participant.name !== user.name)
-		updateDoc(PLANNING_REF_WITH_ID(router.query.id as string), {
+		updateDoc(PLANNING_REF_BY_ID(router.query.id as string), {
 			participants: [...updatedParticipants, { ...user, vote: selectedCard }],
 		})
 	}
@@ -36,13 +46,13 @@ export default function CardSelector({ participants, revealed, average, planning
 						{supportText}
 					</h2>
 					<section className='grid grid-cols-3 gap-4 w-full place-items-center max-w-xs h-full sm:grid-cols-4'>
-						{cards.map((card: any, idx) => (
+						{cards.map((card: string | number, idx) => (
 							<button
 								className={`border-solid border text-xl grid place-items-center rounded-lg w-16 font-semibold h-20 transition-all active:scale-95 hover:border-gray-500 ${
 									selectedCard === card ? 'bg-gray-800 text-white' : 'bg-gray-50 border-gray-200 '
 								}`}
 								onClick={() => setSelectedCard(card)}
-								key={card + idx}
+								key={`${card}_${idx}`}
 							>
 								{card}
 							</button>
