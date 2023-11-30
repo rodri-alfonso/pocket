@@ -1,13 +1,11 @@
 const nextJest = require('next/jest')
 
 const createJestConfig = nextJest({
-	// Provide the path to your Next.js app to load next.config.js and .env files in your test environment
 	dir: './',
 })
 
 const customJestConfig = {
 	moduleNameMapper: {
-		// Handle module aliases (this will be automatically configured for you soon)
 		'^@/(.*)$': '<rootDir>/src/$1',
 
 		'^@/public/(.*)$': '<rootDir>/public/$1',
@@ -17,7 +15,12 @@ const customJestConfig = {
 	setupFilesAfterEnv: ['./jest.setup.ts'],
 	clearMocks: true,
 	collectCoverage: true,
-	collectCoverageFrom: ['./**/*.{js,jsx,ts,tsx}', '!./**/_*.{js,jsx,ts,tsx}'],
+	collectCoverageFrom: [
+		'./utils/**/*.{ts,tsx}',
+		'./components/**/*.{ts,tsx}',
+		'./hooks/**/*.{ts,tsx}',
+		'./context/**/*.{ts,tsx}',
+	],
 	coverageThreshold: {
 		global: {
 			branches: 30,
