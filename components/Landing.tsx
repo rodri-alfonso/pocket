@@ -20,7 +20,7 @@ export default function Landing() {
 		<>
 			<Head>
 				<link rel='icon' href='/favicon.svg' sizes='<generated>' />
-				<title>Pocket | Landing</title>
+				<title>Pocket | Fast, easy, on-the-go poker planning</title>
 				<meta
 					name='description'
 					content='Welcome to Pocket, a web app for Agile teams to creating rooms, invite your colleagues and vote to estimate tasks in real time.'

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Input from '@/theme/Input'
 import uniqid from 'uniqid'
-import { useRegistration } from '@/context/planning'
+import { useAuth } from '@/context/auth'
 import Button from '@/theme/button'
 import Avatar from '@/theme/avatar'
 import Avatars from '@/assets/avatars'
@@ -12,11 +12,11 @@ const AVATARS_LIST: AvatarType[] = ['F2', 'F3', 'F4', 'F5', 'F6', 'M1', 'M2', 'M
 export default function Register({ onClose }: any) {
 	const [username, setUsername] = useState('')
 	const [avatar, setAvatar] = useState<AvatarType>('M6')
-	const { setRegistration } = useRegistration()
+	const { login } = useAuth()
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
-		setRegistration({ name: username, id: uniqid(), avatar })
+		login({ name: username, id: uniqid(), avatar })
 	}
 
 	return (

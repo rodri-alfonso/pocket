@@ -2,19 +2,19 @@ import Input from '@/theme/Input'
 import { useState } from 'react'
 import Router from 'next/router'
 import { Planning } from '@/types/planning'
-import { useRegistration } from '@/context/planning'
-import ButtonDouble from '@/theme/button-double'
-import planningService from '@/services/planning'
+import { useAuth } from '@/context/auth'
+import { createPlanning } from '@/services/planning'
 import Avatar from '@/theme/avatar'
 import Button from '@/theme/button'
 
 export default function PlanningForm({ onClose }: any) {
 	const [planningName, setPlanningName] = useState('')
-	const { user } = useRegistration()
+	const { user } = useAuth()
+	console.log('🚀 ~ file: PlanningForm.tsx:13 ~ user:', user)
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
-		if (!planningName) return console.log('Please fill out all fields')
+		if (!planningName) return
 
 		const payload: Planning = {
 			hostId: user.id,
@@ -25,7 +25,7 @@ export default function PlanningForm({ onClose }: any) {
 			votingSystem: 'fibonacci',
 		}
 
-		planningService.createDocument(payload).then((response: any) => Router.push(`/planning/${response.id}`))
+		createPlanning(payload).then((response: any) => Router.push(`/planning/${response.id}`))
 	}
 
 	return (
@@ -40,7 +40,6 @@ export default function PlanningForm({ onClose }: any) {
 					onChange={(e) => setPlanningName(e.target.value)}
 				/>
 			</div>
-			{/* <ButtonDouble labelPrimary='Create' labelSecondary='Cancel' disabled={!planningName} onClickSecondary={onClose} /> */}
 			<div className='w-full grid gap-2'>
 				<Button text='Create' type='submit' disabled={!planningName} onClick={() => {}} className='w-full' />
 				<Button type='button' text='Cancel' onClick={onClose} className='w-full text-gray-800' />

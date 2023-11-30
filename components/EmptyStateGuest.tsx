@@ -1,40 +1,28 @@
 import Page from '@/layouts/Page'
 import Input from '@/theme/Input'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { useRegistration } from '@/context/planning'
+import { useState } from 'react'
+import { useAuth } from '@/context/auth'
 import Content from '@/layouts/Content'
 import Button from '@/theme/button'
-import { Participant } from '@/types/planning'
-import planningService from '@/services/planning'
 import Alert from '@/theme/alert'
-import { setStorage, storage } from '@/utils/planning-local-storage'
 import Avatar from '@/assets/avatars'
+import { Planning } from '@/types/planning'
+import { useRegisterParticipant } from '@/hooks/participant'
 
-export default function EmptyStateGuests() {
+interface Props {
+	planning: Planning
+}
+
+export default function EmptyStateGuests({ planning }: Props) {
 	const router = useRouter()
-	const [isAlertOpen, setIsAlertOpen] = useState(false)
-	const planningLink = `${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}`
-	const { user } = useRegistration()
 	const planningId = router.query.id as string
 
-	const { addParticipant, getDocument } = planningService
+	const { user } = useAuth()
+	const [isAlertOpen, setIsAlertOpen] = useState(false)
+	useRegisterParticipant({ participants: planning.participants, planningId, user })
 
-	useEffect(() => {
-		getDocument(planningId).then((document) => {
-			if (!document.exists()) return
-
-			const isUserInParticipants = document
-				.data()
-				.participants.some((participant: Participant) => participant.id === user.id)
-
-			if (user.name && !isUserInParticipants) {
-				addParticipant(planningId, { name: user.name, vote: 0, id: user.id, avatar: user.avatar })
-
-				setStorage({ ...user, concurrentPlannings: [planningId] })
-			}
-		})
-	}, [])
+	const planningLink = `${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}`
 
 	function handleCopyLink() {
 		navigator.clipboard.writeText(planningLink).then(() => {
@@ -43,11 +31,7 @@ export default function EmptyStateGuests() {
 	}
 
 	return (
-		<Page
-			className='p-10'
-			title='Pocket | Empty Planning'
-			description='Welcome to Pocket, a web app for Agile teams to creating rooms, invite your colleagues and vote to estimate tasks in real time.'
-		>
+		<Page className='p-10'>
 			<Content className='pt-8'>
 				<picture className='grid gap-2 place-items-center pb-4'>
 					<Avatar type={user.avatar} />

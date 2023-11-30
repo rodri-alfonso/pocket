@@ -1,11 +1,12 @@
 import { Participant } from '@/types/planning'
-import { useRegistration } from '@/context/planning'
+import { useAuth } from '@/context/auth'
 import CheckIcon from '@/assets/icons/Check'
 import { useState } from 'react'
-import planningService from '@/services/planning'
+import { deletePlanningParticipant } from '@/services/planning'
 import { useRouter } from 'next/router'
 import OptionsModal from '../OptionsModal'
 import Avatar from '@/assets/avatars'
+import { INITIAL_PARTICIPANT_DATA } from '@/utils/config'
 
 interface Props {
 	participants: Participant[]
@@ -13,22 +14,17 @@ interface Props {
 	hostId?: string
 }
 
-const initialParticipant = {
-	id: '',
-	name: '',
-	vote: 0,
-}
-
 export default function Participants({ participants, average, hostId }: Props) {
 	const router = useRouter()
-	const { user } = useRegistration()
-	const [selectedParticipant, setSelectedParticipant] = useState(initialParticipant)
+	const { user } = useAuth()
+	const [selectedParticipant, setSelectedParticipant] = useState<Participant>(INITIAL_PARTICIPANT_DATA)
 
 	const isHost = user.id === hostId
 
 	function handleDelete() {
-		setSelectedParticipant(initialParticipant)
-		planningService.deleteParticipant(router.query.id as string, selectedParticipant.id, participants)
+		if (!selectedParticipant) return
+		setSelectedParticipant(INITIAL_PARTICIPANT_DATA)
+		deletePlanningParticipant(router.query.id as string, selectedParticipant.id, participants)
 	}
 
 	return (
@@ -58,11 +54,11 @@ export default function Participants({ participants, average, hostId }: Props) {
 			{Boolean(selectedParticipant.id) && (
 				<OptionsModal
 					isOpen={Boolean(selectedParticipant.id)}
-					onClose={() => setSelectedParticipant(initialParticipant)}
+					onClose={() => setSelectedParticipant(INITIAL_PARTICIPANT_DATA)}
 					labelPrimary='Expel'
 					labelSecondary='Cancel'
 					onClickPrimary={handleDelete}
-					onClickSecondary={() => setSelectedParticipant(initialParticipant)}
+					onClickSecondary={() => setSelectedParticipant(INITIAL_PARTICIPANT_DATA)}
 					title={`Do you want to expel ${selectedParticipant?.name}?`}
 				/>
 			)}

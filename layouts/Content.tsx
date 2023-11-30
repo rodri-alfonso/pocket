@@ -1,4 +1,4 @@
-import { useRegistration } from '@/context/planning'
+import { useAuth } from '@/context/auth'
 import { useRouter } from 'next/router'
 import LogoutModal from '@/components/LogoutModal'
 import { useState } from 'react'
@@ -7,7 +7,7 @@ import BackIcon from '@/assets/icons/Back'
 import Link from 'next/link'
 import ShareIcon from '@/assets/icons/Share'
 import DeleteIcon from '@/assets/icons/Delete'
-import planningService from '@/services/planning'
+import { deletePlanning } from '@/services/planning'
 import OptionsModal from '@/components/OptionsModal'
 import Avatar from '@/assets/avatars'
 
@@ -19,7 +19,7 @@ interface Props {
 
 export default function Content({ children, className = '', isHost }: Props) {
 	const router = useRouter()
-	const { user } = useRegistration()
+	const { user } = useAuth()
 	const [isAlertOpen, setIsAlertOpen] = useState(false)
 	const [isDeleteOpen, setIsDeleteOpen] = useState(false)
 
@@ -30,7 +30,7 @@ export default function Content({ children, className = '', isHost }: Props) {
 	}
 
 	function handleDeletePlanning() {
-		planningService.deletePlanning(router.query.id as string).then(() => {
+		deletePlanning(router.query.id as string).then(() => {
 			router.push('/')
 		})
 	}

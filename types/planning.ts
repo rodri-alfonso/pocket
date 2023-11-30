@@ -1,5 +1,6 @@
 import { AvatarType } from '@/assets/avatars'
-type VotingSystem = 'fibonacci' | 'tshirt' | 'custom'
+
+export type VotingSystem = 'fibonacci' | 'tshirt' | 'custom'
 
 export type Participant = {
 	vote: number
