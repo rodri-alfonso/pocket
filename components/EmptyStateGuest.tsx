@@ -32,7 +32,7 @@ export default function EmptyStateGuests({ planning }: Props) {
 
 	return (
 		<Page className='p-10'>
-			<Content className='pt-8'>
+			<Content className='pt-8' isHost={planning.hostId === user.id}>
 				<picture className='grid gap-2 place-items-center pb-4'>
 					<Avatar type={user.avatar} />
 					<h3 className='font-semibold h-5 capitalize text-sm'>{user.name}</h3>
