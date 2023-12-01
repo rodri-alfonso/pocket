@@ -3,6 +3,7 @@ import { useIsMobile } from '@/hooks/useWindowSize'
 import Banner from '@/components/Banner'
 import Layout from './Layout'
 import { useAuth } from '@/context/auth'
+import { useRouter } from 'next/router'
 
 interface Props {
 	children: React.ReactNode
@@ -10,7 +11,9 @@ interface Props {
 }
 
 export default function Page({ children, className = '' }: Props) {
-	const [isOpen, setIsOpen] = useState(false)
+	const router = useRouter()
+	const planningId = router.query.id
+	const [isOpen, setIsOpen] = useState(Boolean(planningId))
 	const isMobile = useIsMobile()
 	const { user } = useAuth()
 

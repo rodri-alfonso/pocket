@@ -4,10 +4,13 @@ import { useIsMobile } from '@/hooks/useWindowSize'
 import Banner from './Banner'
 import Layout from '@/layouts/Layout'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 export default function Landing() {
 	const isMobile = useIsMobile()
-	const [isOpenModal, setIsOpenModal] = useState(false)
+	const router = useRouter()
+	const planningId = router.query.id
+	const [isOpenModal, setIsOpenModal] = useState(Boolean(planningId))
 
 	if (isMobile && isOpenModal)
 		return (
