@@ -1,6 +1,10 @@
-export default function Spinner() {
+interface Props {
+	isFullPage?: boolean
+}
+
+export default function Spinner({ isFullPage }: Props) {
 	return (
-		<div className='h-full grid place-items-center w-full'>
+		<div className={`${isFullPage ? 'h-[var(--doc-height)]' : 'h-full'} grid place-items-center w-full`}>
 			<svg
 				className='w-10 h-10 text-gray-200 animate-spin dark:text-gray-300 fill-gray-700'
 				viewBox='0 0 100 101'

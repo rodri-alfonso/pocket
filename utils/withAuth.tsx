@@ -11,7 +11,7 @@ export default function withAuth(Component: any) {
 	const Auth = (props: AuthProps) => {
 		const { isLoading, user } = usePersistAuth()
 
-		if (isLoading) return <Spinner />
+		if (isLoading) return <Spinner isFullPage />
 		if (!user.name) return <Landing />
 		return <Component {...props} />
 	}
