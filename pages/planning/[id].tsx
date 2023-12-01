@@ -35,20 +35,17 @@ function Room({ initialPlanning }: Props) {
 	const isEmptyParticipants =
 		planning.participants.filter((participant) => participant.name !== initialPlanning.host).length === 0
 	const currentParticipant = planning.participants.find((participant) => participant.name === user.name)
+	const orderParticipants = planning.participants.sort((a, b) => a.name.localeCompare(b.name))
 
 	if (isEmptyParticipants) return <EmptyStateGuests planning={planning} />
 
 	return (
 		<Page>
 			{!!currentParticipant?.vote ? (
-				<ResumeView
-					participants={planning.participants}
-					average={planning.average}
-					isHost={planning.hostId === user.id}
-				/>
+				<ResumeView participants={orderParticipants} average={planning.average} isHost={planning.hostId === user.id} />
 			) : (
 				<CardSelector
-					participants={planning.participants}
+					participants={orderParticipants}
 					revealed={Boolean(planning.average)}
 					average={planning.average}
 					hostId={planning.hostId}
