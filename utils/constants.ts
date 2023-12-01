@@ -10,3 +10,5 @@ export const ENVIRONMENTS = {
 	STORAGE_KEY: process.env.NEXT_PUBLIC_STORAGE_KEY || '',
 	PLANNING_STORAGE_KEY: process.env.NEXT_PUBLIC_PLANNING_STORAGE_KEY || '',
 }
+
+export const DOC_HEIGHT = '--doc-height'
