@@ -1,6 +1,5 @@
+import { DOC_HEIGHT } from '@/utils/constants'
 import { useEffect } from 'react'
-
-const DOC_HEIGHT = '--doc-height'
 
 export function useHeight() {
 	useEffect(() => {
