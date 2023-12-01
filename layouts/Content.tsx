@@ -22,6 +22,7 @@ export default function Content({ children, className = '', isHost }: Props) {
 	const { user } = useAuth()
 	const [isAlertOpen, setIsAlertOpen] = useState(false)
 	const [isDeleteOpen, setIsDeleteOpen] = useState(false)
+	const [isLoading, setIsLoading] = useState(false)
 
 	function handleShare() {
 		navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}`).then(() => {
@@ -30,6 +31,7 @@ export default function Content({ children, className = '', isHost }: Props) {
 	}
 
 	function handleDeletePlanning() {
+		setIsLoading(true)
 		deletePlanning(router.query.id as string).then(() => {
 			router.push('/')
 		})
@@ -67,6 +69,8 @@ export default function Content({ children, className = '', isHost }: Props) {
 						onClickPrimary={handleDeletePlanning}
 						onClickSecondary={() => setIsDeleteOpen(false)}
 						title='Do you want to delete this campaing?'
+						disabled={isLoading}
+						loading={isLoading}
 					>
 						{isHost && (
 							<button

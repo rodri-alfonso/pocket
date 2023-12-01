@@ -1,5 +1,6 @@
 import Modal from '@/theme/modal'
 import CloseIcon from '@/assets/icons/Close'
+import Button from '@/theme/button'
 
 interface Props {
 	title?: string
@@ -10,17 +11,21 @@ interface Props {
 	isOpen: boolean
 	onClose: () => void
 	children?: React.ReactNode | React.ReactNode[]
+	loading?: boolean
+	disabled?: boolean
 }
 
 export default function OptionsModal({
 	isOpen,
 	onClose,
-	labelPrimary,
-	labelSecondary,
-	onClickPrimary,
-	onClickSecondary,
+	labelPrimary = '',
+	labelSecondary = '',
+	onClickPrimary = () => {},
+	onClickSecondary = () => {},
 	children,
 	title,
+	loading,
+	disabled,
 }: Props) {
 	return (
 		<>
@@ -36,12 +41,13 @@ export default function OptionsModal({
 					<div className='grid justify-center h-full gap-6 py-5 w-4/5 mx-auto'>
 						<span className='text-center pb-2 font-semibold text-xl'>{title}</span>
 						<div className='w-full px-8 font-semibold'>
-							<button
-								className='mb-3 bg-gray-800 text-white px-9 w-full py-2 rounded-xl active:scale-95 transition-all'
+							<Button
+								className='mb-3 w-full'
 								onClick={onClickPrimary}
-							>
-								{labelPrimary}
-							</button>
+								text={labelPrimary}
+								loading={loading}
+								disabled={disabled}
+							/>
 							<button
 								className='border border-solid hover:border-gray-400 hover:text-gray-700 border-gray-300 text-gray-500 px-9 py-2  w-full rounded-xl active:scale-95 transition-all'
 								onClick={onClickSecondary}
