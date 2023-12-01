@@ -9,11 +9,12 @@ import Button from '@/theme/button'
 
 export default function PlanningForm({ onClose }: any) {
 	const [planningName, setPlanningName] = useState('')
+	const [isLoading, setIsLoading] = useState(false)
 	const { user } = useAuth()
-	console.log('🚀 ~ file: PlanningForm.tsx:13 ~ user:', user)
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault()
+		setIsLoading(true)
 		if (!planningName) return
 
 		const payload: Planning = {
@@ -41,7 +42,14 @@ export default function PlanningForm({ onClose }: any) {
 				/>
 			</div>
 			<div className='w-full grid gap-2'>
-				<Button text='Create' type='submit' disabled={!planningName} onClick={() => {}} className='w-full' />
+				<Button
+					text={isLoading ? 'Creating' : 'Create'}
+					type='submit'
+					disabled={!planningName || isLoading}
+					onClick={() => {}}
+					className='w-full'
+					loading={isLoading}
+				/>
 				<Button type='button' text='Cancel' onClick={onClose} className='w-full text-gray-800' />
 			</div>
 		</form>
