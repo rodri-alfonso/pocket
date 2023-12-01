@@ -28,7 +28,7 @@ export default function Participants({ participants, average, hostId }: Props) {
 	}
 
 	return (
-		<section className='h-28 px-6 items-center rounded-3xl flex gap-6 w-full overflow-x-scroll bg-gray-100'>
+		<section className='h-28 px-6 items-center rounded-3xl flex gap-3 w-full overflow-x-scroll bg-gray-100'>
 			{participants.map((participant) => (
 				<button
 					disabled={!isHost}
@@ -36,7 +36,11 @@ export default function Participants({ participants, average, hostId }: Props) {
 					key={participant.name}
 					className={`grid place-items-center gap-2 text-center active:scale-95 transition-all disabled:active:scale-[0px]   p-1 rounded-xl disabled:bg-inherit ${
 						Boolean(participant.vote) ? '' : 'opacity-30 '
-					} ${isHost ? 'hover:opacity-100 hover:bg-gray-200' : ''}`}
+					} ${
+						isHost && participant.id !== hostId
+							? 'hover:opacity-100 hover:bg-gray-200'
+							: 'cursor-default active:scale-100'
+					}`}
 				>
 					<div className='relative'>
 						<Avatar type={participant.avatar} />

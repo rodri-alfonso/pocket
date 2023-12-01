@@ -24,15 +24,16 @@ export default function Register({ onClose }: any) {
 			<Avatar name={username} type={avatar} />
 			<form onSubmit={handleSubmit} className='flex flex-col gap-10 justify-between items-center h-full'>
 				<div className='w-full grid gap-10 text-center'>
-					<div className=' w-full rounded-3xl grid gap-6'>
-						<h2 className='font-semibold text-lg text-black'>Welcome{username && `, ${username}`}</h2>
+					<div className=' w-full rounded-3xl grid gap-3 pt-4'>
+						<h2 className='font-semibold text-lg text-black capitalize'>
+							Welcome{Boolean(username) && `, ${username}`}
+						</h2>
 						<Input
 							label='Choose a Nickname'
 							placeholder='Type you nickname...'
 							value={username}
 							onChange={(e) => setUsername(e.target.value)}
 						/>
-						{/* To be recognized by others, please enter your username. */}
 					</div>
 					<section className='w-full grid gap-8 place-items-center max-w-xs mx-auto'>
 						<h2 className='font-semibold text-gray-500'>Choose an avatar</h2>
