@@ -12,6 +12,11 @@ const PLANNING_MOCK: Planning = {
 }
 
 describe('withAuth test', () => {
+	const useRouter = jest.spyOn(require('next/router'), 'useRouter')
+
+	useRouter.mockImplementation(() => ({
+		query: '',
+	}))
 	it('ShouldRenderLandingComponentWithoutRegister_WhenHasNoUserLogedIn', () => {
 		const renderedComponent = render(<ComponentMock planning={PLANNING_MOCK} />)
 

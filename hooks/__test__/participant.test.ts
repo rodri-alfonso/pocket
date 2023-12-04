@@ -15,9 +15,10 @@ const mockPayload = {
 	planningId: '22',
 	user: USER_MOCK_DATA,
 }
-
 describe('useRegisterParticipant test', () => {
 	it('ShouldSetUserInStorage_WhenUseRegisterParticipantIsCalledWithProps', () => {
+		expect(Object.keys(localStorage).length).toBe(0)
+
 		renderHook(() => useRegisterParticipant(mockPayload))
 
 		const serviceObject = { addPlanningParticipant }
