@@ -45,7 +45,11 @@ export default function Participants({ participants, average, hostId }: Props) {
 					<div className='relative'>
 						<Avatar type={participant.avatar} />
 						{Boolean(participant.vote) && (
-							<span className='bg-gray-900 w-6 h-6 grid place-items-center rounded-full absolute -top-1.5 -left-1.5 text-white font-bold text-xs'>
+							<span
+								className={`bg-gray-900 w-6 h-6 grid place-items-center rounded-full absolute -top-1.5 -left-1.5 text-white font-bold text-xs  ${
+									Boolean(average) ? 'animatecss-flipInY animatecss-faster' : 'animatecss-bounceIn animatecss-faster'
+								}`}
+							>
 								{Boolean(average) ? participant.vote : <CheckIcon className='w-2.5 h-2.5 text-white' />}
 							</span>
 						)}

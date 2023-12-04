@@ -30,8 +30,8 @@ export default function OptionsModal({
 	return (
 		<>
 			{children}
-			{isOpen && (
-				<Modal isOpen={isOpen} onClose={onClose} className='w-4/6 h-auto relative'>
+			{
+				<Modal isOpen={isOpen} onClose={onClose} className={`w-4/6 h-auto relative`}>
 					<button
 						className='absolute top-2 bg-gray-100 right-2 rounded-lg hover:bg-gray-200 hover:text-gray-700 text-gray-500 p-2 active:scale-90 transition-all'
 						onClick={onClose}
@@ -57,7 +57,7 @@ export default function OptionsModal({
 						</div>
 					</div>
 				</Modal>
-			)}
+			}
 		</>
 	)
 }

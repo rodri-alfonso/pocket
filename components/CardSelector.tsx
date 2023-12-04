@@ -40,7 +40,7 @@ export default function CardSelector({ participants, votingSystem, revealed, ave
 				<div className='grid gap-6 justify-center'>
 					<h2
 						className={`text-center transition-all font-medium  rounded-full text-sm py-0.5 px-3 ${
-							selectedCard ? 'text-white bg-gray-600' : 'text-gray-500 bg-gray-100'
+							selectedCard ? 'text-white bg-gray-800 animatecss-pulse animatecss-faster' : 'text-gray-500 bg-gray-100'
 						}`}
 					>
 						{supportText}

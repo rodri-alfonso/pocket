@@ -15,10 +15,12 @@ interface Props {
 
 const Card = ({ vote, isRevealed, count }: Card) => {
 	return (
-		<div className='grid place-items-center gap-1'>
+		<div className='grid place-items-center gap-1 '>
 			<div
 				className={`border-2 border-solid h-16 w-9 grid place-items-center  font-semibold rounded-md ${
-					isRevealed ? 'text-gray-600 border-gray-600' : 'text-gray-400 border-gray-400'
+					isRevealed
+						? 'text-gray-600 border-gray-600 animatecss-flipInY animatecss-faster'
+						: 'text-gray-400 border-gray-400'
 				}`}
 			>
 				{isRevealed ? vote : '?'}
@@ -58,7 +60,9 @@ export default function Results({ participants, hasAverage, average }: Props) {
 				<span className={`font-semibold ${hasAverage ? 'text-gray-800' : 'text-gray-400'}`}>Average</span>
 				<div
 					className={`w-24 h-32 rounded-xl grid place-items-center font-semibold text-3xl transition-all  ${
-						hasAverage ? 'bg-gray-800 text-white' : ' text-gray-400 border-2 border-solid border-gray-400'
+						hasAverage
+							? 'bg-gray-800 text-white animatecss-flipInY animatecss-faster'
+							: ' text-gray-400 border-2 border-solid border-gray-400'
 					}`}
 				>
 					{average || '?'}

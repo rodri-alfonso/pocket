@@ -33,7 +33,7 @@ export default function Landing() {
 			<div className={`h-[var(--doc-height)] flex bg-white ${isOpenModal ? '' : ''} gap-4 px-4`}>
 				<Banner onClick={() => setIsOpenModal(true)} disabled={isOpenModal} />
 				{isOpenModal && (
-					<div className='w-2/5 p-4 h-full'>
+					<div className='w-2/5 p-4 h-full animatecss-slideInRight animatecss-faster'>
 						<Register onClose={() => setIsOpenModal(false)} />
 					</div>
 				)}

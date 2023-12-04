@@ -89,14 +89,7 @@ export default function Content({ children, className = '', isHost }: Props) {
 					</button>
 					<LogoutModal />
 				</div>
-				{isAlertOpen && (
-					<Alert
-						isOpen={isAlertOpen}
-						onClose={() => setIsAlertOpen(false)}
-						label='Copied link to clipboard!'
-						className='top-16 -right-32'
-					/>
-				)}
+				<Alert isOpen={isAlertOpen} onClose={() => setIsAlertOpen(false)} label='Copied link to clipboard!' />
 			</header>
 		)
 	}
