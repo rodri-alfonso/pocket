@@ -64,7 +64,7 @@ export default function Content({ children, className = '', isHost }: Props) {
 					<OptionsModal
 						isOpen={isDeleteOpen}
 						onClose={() => setIsDeleteOpen(false)}
-						labelPrimary='Delete'
+						labelPrimary={isLoading ? 'Deleting...' : 'Delete'}
 						labelSecondary='Cancel'
 						onClickPrimary={handleDeletePlanning}
 						onClickSecondary={() => setIsDeleteOpen(false)}
