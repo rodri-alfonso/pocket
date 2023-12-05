@@ -1,38 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pocket
 
-## Getting Started
+## Introduction
 
-First, run the development server:
+This is a web application for Agile teams to do [Scrum Poker plannings](https://asana.com/es/resources/planning-poker). You can create rooms, invite your colleagues and vote to estimate tasks in real time.
+
+## Deployment
+
+**See deployment**: ▶︎ [Pocket](https://pocket-planning.vercel.app/).
+
+## How to use
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+$ git clone https://github.com/rodri-alfonso/pocket.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```bash
+$ cd pocket
+```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Install dependencies
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```bash
+$ npm install
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Run the app
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+$ npm run dev
+```
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+A list of the things you can do with Pocket:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Create and delete a planning room and get an invitation link
+- Create an avatar to identify yourself
+- Expel planning participants
+- Vote in realtime with others participants in a planning room
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Technologies
 
-## Deploy on Vercel
+- [NextJS](https://nextjs.org/)
+- [Tailwindcss](https://tailwindcss.com/)
+- [Firebase](https://firebase.google.com/)
+- [Jest](https://jestjs.io/)
+- [React Testing Library](https://testing-library.com/)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Credits
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This software uses the following open source packages:
+
+- [Notion Style Avatar Creator](https://www.drawkit.com/product/notion-style-avatar-creator)
+
+#### Thanks to use Pocket. If you like it, give it a Github star :)
