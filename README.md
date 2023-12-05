@@ -1,5 +1,10 @@
 # Pocket
 
+## Screens
+
+![Vote flow](public/screen-1.gif)
+![Home screen](public/screen-2.png)
+
 ## Introduction
 
 This is a web application for Agile teams to do [Scrum Poker plannings](https://asana.com/es/resources/planning-poker). You can create rooms, invite your colleagues and vote to estimate tasks in real time.

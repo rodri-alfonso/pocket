@@ -20,7 +20,7 @@ export default function Page({ children, className = '' }: Props) {
 	if (isMobile) return <Layout className={className}>{children}</Layout>
 
 	return (
-		<main className={`h-[var(--doc-height)] flex ${isOpen ? 'pl-4' : 'pl-4'} gap-4`}>
+		<main className={`h-[var(--doc-height)] flex gap-4`}>
 			<Banner onClick={() => setIsOpen(true)} disabled={isOpen || Boolean(user.name)} />
 			<div className='h-[var(--doc-height)] w-2/5 relative'>
 				<Layout className={className}>{children}</Layout>
