@@ -27,7 +27,7 @@ export default function Banner({ disabled = false, onClick }: BannerProps) {
 						<h3 className='text-gray-500 font-semibold text-xl max-sm:text-lg'>
 							Simplify your Scrum Poker with Pocket.
 						</h3>
-						<h2 className='text-gray-800 font-black text-6xl max-w-3xl max-sm:text-4xl'>
+						<h2 className='text-gray-800 font-black text-6xl max-w-3xl max-sm:text-4xl animatecss-tada animatecss-slow'>
 							Fast, easy, on-the-go poker planning
 						</h2>
 						<h3 className='text-gray-400 font-medium text-xl max-w-xl max-sm:text-lg'>

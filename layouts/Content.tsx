@@ -41,7 +41,7 @@ export default function Content({ children, className = '', isHost }: Props) {
 		return (
 			<header className='flex items-center justify-between gap-3'>
 				<div className='flex items-center gap-3'>
-					<Avatar type={user.avatar} className='w-9 h-9' />
+					<Avatar type={user.avatar} className='w-10 h-10' />
 					<h2 className='flex items-center gap-2 font-bold text-gray-700 capitalize'>
 						Hi, {user.name} <span>👋</span>
 					</h2>

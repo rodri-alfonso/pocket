@@ -4,6 +4,7 @@ import Avatars from '@/assets/avatars'
 interface AvatarProps {
 	type: AvatarType
 	name: string
+	flipped?: boolean
 }
 
 export default function Avatar({ type, name }: AvatarProps) {
