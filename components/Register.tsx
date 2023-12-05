@@ -21,7 +21,7 @@ export default function Register({ onClose }: any) {
 
 	return (
 		<div className='h-full w-full flex flex-col rounded-2xl'>
-			<Avatar name={username} type={avatar} />
+			<Avatar name={username} type={avatar} flipped />
 			<form onSubmit={handleSubmit} className='flex flex-col gap-10 justify-between items-center h-full'>
 				<div className='w-full grid gap-10 text-center'>
 					<div className=' w-full rounded-3xl grid gap-3 pt-4'>
