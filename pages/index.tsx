@@ -2,7 +2,7 @@ import Page from '@/layouts/Page'
 import Content from '@/layouts/Content'
 import withAuth from '@/utils/withAuth'
 import { useAuth } from '@/context/auth'
-import { Planning } from '@/types/planning'
+import { Participant, Planning } from '@/types/planning'
 import PlanningCard from '@/components/PlanningCard'
 import PlusIcon from '@/assets/icons/Plus'
 import PlanningForm from '@/components/PlanningForm'
@@ -24,7 +24,11 @@ export async function getServerSideProps() {
 function Home({ plannings }: Props) {
 	const { user } = useAuth()
 	const [isOpen, setIsOpen] = useState(false)
-	const createdPlannings = plannings.filter((planning) => planning.hostId === user.id)
+	const planningsParticipation = plannings.filter((planning: Planning) => {
+		if(planning.participants.some((participant: Participant) => participant.id === user.id)){
+			return planning
+		}
+	})
 
 	if (isOpen)
 		return (
@@ -49,8 +53,8 @@ function Home({ plannings }: Props) {
 						</div>
 
 						<div className='grid place-items-center gap-3 w-full rounded-xl '>
-							{createdPlannings.map((planning) => (
-								<PlanningCard key={planning.hostId} {...planning} />
+							{planningsParticipation.map((planning) => (
+								<PlanningCard key={planning.id} {...planning} />
 							))}
 						</div>
 					</section>
